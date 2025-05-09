@@ -519,7 +519,7 @@ export default function Home() {
             {/* RGA Dashboard Link */}
             <div className="mt-8">
               <a 
-                href="https://dashboard.tareeqi.com" 
+                href="https://salik-app-project-d4e90.web.app/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={`${outfit.className} inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-all`}

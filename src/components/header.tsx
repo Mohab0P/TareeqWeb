@@ -32,6 +32,9 @@ export default function Header() {
             <Link href="/features" className="text-gray-600 hover:text-purple-600 transition-colors">
               Features
             </Link>
+            <Link href="/how-it-works" className="text-gray-600 hover:text-purple-600 transition-colors">
+              How It Works
+            </Link>
             <Link href="/about" className="text-gray-600 hover:text-purple-600 transition-colors">
               About
             </Link>
@@ -39,7 +42,7 @@ export default function Header() {
               Contact
             </Link>
             <Link 
-              href="https://dashboard.tareeqi.com" 
+              href="https://salik-app-project-d4e90.web.app/" 
               target="_blank"
               rel="noopener noreferrer"
               className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
@@ -76,6 +79,13 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               Features
+            </Link>
+            <Link 
+              href="/how-it-works" 
+              className="block px-4 py-2 text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-lg transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              How It Works
             </Link>
             <Link 
               href="/about" 
