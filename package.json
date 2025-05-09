@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 --turbopack",
-    "build": "next build && powershell -Command \"Copy-Item -Path .nojekyll -Destination out/ -Force; Copy-Item -Path index.html -Destination out/ -Force\"",
+    "build": "next build && node -e \"const fs = require('fs'); fs.copyFileSync('.nojekyll', 'out/.nojekyll'); fs.copyFileSync('index.html', 'out/index.html');\"",
     "start": "next start",
     "lint": "bunx biome lint --write && bunx tsc --noEmit",
     "format": "bunx biome format --write",
-    "deploy": "next build && powershell -Command \"Copy-Item -Path .nojekyll -Destination out/ -Force; Copy-Item -Path index.html -Destination out/ -Force\""
+    "deploy": "next build && node -e \"const fs = require('fs'); fs.copyFileSync('.nojekyll', 'out/.nojekyll'); fs.copyFileSync('index.html', 'out/index.html');\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
