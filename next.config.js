@@ -2,6 +2,7 @@
 const nextConfig = {
   output: 'export',
   distDir: 'out',
+  basePath: '/TareeqWeb',
   images: {
     unoptimized: true,
     domains: [

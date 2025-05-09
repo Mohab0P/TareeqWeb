@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 --turbopack",
-    "build": "next build",
+    "build": "next build && cp .nojekyll out/ && cp index.html out/",
     "start": "next start",
     "lint": "bunx biome lint --write && bunx tsc --noEmit",
     "format": "bunx biome format --write",
-    "deploy": "next build && touch out/.nojekyll"
+    "deploy": "next build && cp .nojekyll out/ && cp index.html out/"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
