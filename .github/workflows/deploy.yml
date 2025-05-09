@@ -11,6 +11,11 @@ permissions:
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -38,4 +43,5 @@ jobs:
         with:
           folder: out # The folder the action should deploy
           branch: gh-pages # The branch the action should deploy to
-          token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }} 
+          token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
+          clean: true # Automatically remove deleted files from the deployment branch 
