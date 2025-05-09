@@ -289,8 +289,8 @@ export default function Home() {
                   key={i}
                   className="absolute w-1 h-1 md:w-2 md:h-2 rounded-full bg-purple-200"
                   style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
+                    left: `${(i * 5) % 100}%`,
+                    top: `${(i * 7) % 100}%`,
                   }}
                   animate={{
                     y: [0, -10, 0, 10, 0],
@@ -299,9 +299,9 @@ export default function Home() {
                     opacity: [0.4, 0.8, 0.4, 0.6, 0.4],
                   }}
                   transition={{
-                    duration: 5 + Math.random() * 5,
+                    duration: 5 + (i % 5),
                     repeat: Infinity,
-                    delay: Math.random() * 5,
+                    delay: i * 0.2,
                   }}
                 />
               ))}
@@ -790,149 +790,222 @@ export default function Home() {
             </motion.p>
             
             {/* Beta Registration Form */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.3 }}
-              className="max-w-md mx-auto bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 mb-12"
+            <div 
+              className="max-w-md mx-auto bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 mb-12 relative overflow-hidden hover:shadow-[0_15px_30px_rgba(0,0,0,0.2)] transition-all duration-300 group"
+              id="beta-form"
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-white mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                      errors.name ? 'border-red-500' : 'border-white/10'
-                    } text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500`}
-                    placeholder="Enter your full name"
-                  />
-                  {errors.name && (
-                    <p className="mt-1 text-sm text-red-400">{errors.name}</p>
-                  )}
+              {/* Scroll reveal animation wrapper */}
+              <div className="opacity-0 translate-y-10 transition-all duration-1000 ease-out" id="form-reveal">
+                {/* Animated background gradient */}
+                <div 
+                  className="absolute inset-0 -z-10 bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-purple-600/20 bg-[length:200%_100%] animate-gradient-x opacity-30"
+                ></div>
+                
+                {/* Animated sparkles */}
+                <div className="absolute -z-5 inset-0 overflow-hidden opacity-0 group-hover:opacity-40 transition-opacity duration-700">
+                  {[...Array(5)].map((_, i) => (
+                    <div 
+                      key={i}
+                      className="absolute w-1 h-1 rounded-full bg-white"
+                      style={{
+                        left: `${(i * 20) % 100}%`,
+                        top: `${(i * 18 + 5) % 100}%`,
+                        animation: `pulse-slow ${2 + (i % 3)}s infinite ease-in-out ${i * 0.4}s`,
+                        opacity: 0.5 + (i * 0.1)
+                      }}
+                    ></div>
+                  ))}
                 </div>
                 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-white mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                      errors.email ? 'border-red-500' : 'border-white/10'
-                    } text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500`}
-                    placeholder="Enter your email"
-                  />
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-400">{errors.email}</p>
-                  )}
-                </div>
-                
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                      errors.phone ? 'border-red-500' : 'border-white/10'
-                    } text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500`}
-                    placeholder="Enter your phone number"
-                  />
-                  {errors.phone && (
-                    <p className="mt-1 text-sm text-red-400">{errors.phone}</p>
-                  )}
-                </div>
-                
-                {submitStatus.type !== 'idle' && (
-                  <div 
-                    className={`p-4 rounded-lg transition-all duration-500 transform ${
-                      submitStatus.type === 'success' 
-                        ? 'bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30' 
-                        : 'bg-gradient-to-r from-red-500/20 to-rose-500/20 border border-red-500/30'
-                    } animate-fade-in-up backdrop-blur-sm`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {submitStatus.type === 'success' ? (
-                        <div className="flex-shrink-0">
-                          <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-green-500/20">
-                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                <form onSubmit={handleSubmit} className="space-y-6 relative">
+                  <div className="opacity-0 translate-y-4 transition-all duration-700 delay-100" id="form-field-1">
+                    <label htmlFor="name" className="block text-sm font-medium text-white mb-2">Full Name</label>
+                    <div className="relative group">
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
+                          errors.name ? 'border-red-500' : 'border-white/10'
+                        } text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:border-white/20 focus:scale-[1.01]`}
+                        placeholder="Enter your full name"
+                      />
+                      <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-purple-400 to-indigo-500 group-focus-within:w-full transition-all duration-300"></div>
+                    </div>
+                    {errors.name && (
+                      <p className="mt-1 text-sm text-red-400 animate-shake">
+                        {errors.name}
+                      </p>
+                    )}
+                  </div>
+                  
+                  <div className="opacity-0 translate-y-4 transition-all duration-700 delay-200" id="form-field-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-white mb-2">Email Address</label>
+                    <div className="relative group">
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
+                          errors.email ? 'border-red-500' : 'border-white/10'
+                        } text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:border-white/20 focus:scale-[1.01]`}
+                        placeholder="Enter your email"
+                      />
+                      <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-purple-400 to-indigo-500 group-focus-within:w-full transition-all duration-300"></div>
+                    </div>
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-400 animate-shake">
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
+                  
+                  <div className="opacity-0 translate-y-4 transition-all duration-700 delay-300" id="form-field-3">
+                    <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">Phone Number</label>
+                    <div className="relative group">
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                        className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
+                          errors.phone ? 'border-red-500' : 'border-white/10'
+                        } text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:border-white/20 focus:scale-[1.01]`}
+                        placeholder="Enter your phone number"
+                      />
+                      <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-purple-400 to-indigo-500 group-focus-within:w-full transition-all duration-300"></div>
+                    </div>
+                    {errors.phone && (
+                      <p className="mt-1 text-sm text-red-400 animate-shake">
+                        {errors.phone}
+                      </p>
+                    )}
+                  </div>
+                  
+                  {submitStatus.type !== 'idle' && (
+                    <div 
+                      className={`p-4 rounded-lg transition-all duration-500 transform ${
+                        submitStatus.type === 'success' 
+                          ? 'bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30' 
+                          : 'bg-gradient-to-r from-red-500/20 to-rose-500/20 border border-red-500/30'
+                      } animate-fade-in-up backdrop-blur-sm`}
+                    >
+                      <div className="flex items-center gap-3">
+                        {submitStatus.type === 'success' ? (
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-green-500/20">
+                              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                              </svg>
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <div className="flex-shrink-0">
-                          <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-500 rounded-full flex items-center justify-center animate-shake shadow-lg shadow-red-500/20">
-                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
+                        ) : (
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-500 rounded-full flex items-center justify-center animate-shake shadow-lg shadow-red-500/20">
+                              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                              </svg>
+                            </div>
                           </div>
+                        )}
+                        <p className="text-sm font-medium text-white drop-shadow-sm">
+                          {submitStatus.message}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="opacity-0 translate-y-4 transition-all duration-700 delay-400" id="form-field-4">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-purple-700 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group active:scale-[0.98]"
+                    >
+                      <span className={`relative z-10 ${isSubmitting ? 'opacity-0' : 'opacity-100'} transition-opacity`}>
+                        Join Beta Program
+                      </span>
+                      {isSubmitting && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         </div>
                       )}
-                      <p className="text-sm font-medium text-white drop-shadow-sm">{submitStatus.message}</p>
-                    </div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity bg-[length:200%_100%] animate-gradient-x"></div>
+                    </button>
                   </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
-                >
-                  <span className={`relative z-10 ${isSubmitting ? 'opacity-0' : 'opacity-100'} transition-opacity`}>
-                    Join Beta Program
-                  </span>
-                  {isSubmitting && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </button>
-              </form>
-            </motion.div>
+                </form>
+              </div>
+            </div>
             
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.5 }}
-              className="flex flex-wrap justify-center gap-6"
+            <div 
+              className="flex flex-wrap justify-center gap-6 animate-fade-in-up"
+              style={{ animationDelay: '300ms' }}
             >
-              <a href="#" className={`${outfit.className} bg-purple-900/80 text-white px-8 py-4 rounded-xl inline-flex items-center gap-4 hover:bg-purple-900 transition-all shadow-[0_10px_25px_rgba(0,0,0,0.2)] group cursor-not-allowed`}>
-                <div className="bg-white/10 p-2 rounded-full">
+              <a 
+                href="#" 
+                className={`${outfit.className} bg-purple-900/80 text-white px-8 py-4 rounded-xl inline-flex items-center gap-4 hover:bg-purple-900 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 group cursor-not-allowed relative overflow-hidden active:scale-[0.98]`}
+              >
+                {/* Animated background glow */}
+                <div
+                  className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.4)_0%,rgba(0,0,0,0)_70%)] animate-pulse-slow"
+                ></div>
+                
+                <div className="bg-white/10 p-2 rounded-full group-hover:rotate-6 transition-transform duration-300">
                   <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                   </svg>
                 </div>
-                <div className="text-left">
-                  <div className="text-xs opacity-70">Coming Soon on</div>
-                  <div className="text-xl font-semibold">App Store</div>
+                <div className="text-left relative">
+                  <div className="text-xs opacity-70 animate-bounce-subtle">
+                    Coming Soon on
+                  </div>
+                  <div className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white bg-[length:200%_100%] animate-gradient-x">
+                    App Store
+                  </div>
+                </div>
+                
+                {/* Coming soon badge */}
+                <div className="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs px-2 py-3 rounded-full font-bold animate-pulse">
+                  SOON
                 </div>
               </a>
               
-              <a href="#" className={`${outfit.className} bg-purple-900/80 text-white px-8 py-4 rounded-xl inline-flex items-center gap-4 hover:bg-purple-900 transition-all shadow-[0_10px_25px_rgba(0,0,0,0.2)] group cursor-not-allowed`}>
-                <div className="bg-white/10 p-2 rounded-full">
+              <a 
+                href="#" 
+                className={`${outfit.className} bg-purple-900/80 text-white px-8 py-4 rounded-xl inline-flex items-center gap-4 hover:bg-purple-900 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 group cursor-not-allowed relative overflow-hidden active:scale-[0.98]`}
+              >
+                {/* Animated background glow */}
+                <div
+                  className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.4)_0%,rgba(0,0,0,0)_70%)] animate-pulse-slow"
+                ></div>
+                
+                <div className="bg-white/10 p-2 rounded-full group-hover:rotate-[-6deg] transition-transform duration-300">
                   <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                   </svg>
                 </div>
-                <div className="text-left">
-                  <div className="text-xs opacity-70">Coming Soon on</div>
-                  <div className="text-xl font-semibold">Google Play</div>
+                <div className="text-left relative">
+                  <div className="text-xs opacity-70 animate-bounce-subtle">
+                    Coming Soon on
+                  </div>
+                  <div className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white bg-[length:200%_100%] animate-gradient-x">
+                    Google Play
+                  </div>
+                </div>
+                
+                {/* Coming soon badge */}
+                <div className="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs px-2 py-3 rounded-full font-bold animate-pulse">
+                  SOON
                 </div>
               </a>
-            </motion.div>
+            </div>
 
             {/* RGA Dashboard Link */}
             <motion.div 
@@ -973,6 +1046,55 @@ export default function Home() {
           </svg>
         </motion.div>
       </motion.section>
+
+      {/* Add scroll animation JavaScript */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener('DOMContentLoaded', function() {
+            const formReveal = document.getElementById('form-reveal');
+            const formField1 = document.getElementById('form-field-1');
+            const formField2 = document.getElementById('form-field-2');
+            const formField3 = document.getElementById('form-field-3');
+            const formField4 = document.getElementById('form-field-4');
+            
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  formReveal.classList.add('opacity-100');
+                  formReveal.classList.remove('translate-y-10');
+                  
+                  setTimeout(() => {
+                    formField1.classList.add('opacity-100');
+                    formField1.classList.remove('translate-y-4');
+                  }, 200);
+                  
+                  setTimeout(() => {
+                    formField2.classList.add('opacity-100');
+                    formField2.classList.remove('translate-y-4');
+                  }, 400);
+                  
+                  setTimeout(() => {
+                    formField3.classList.add('opacity-100');
+                    formField3.classList.remove('translate-y-4');
+                  }, 600);
+                  
+                  setTimeout(() => {
+                    formField4.classList.add('opacity-100');
+                    formField4.classList.remove('translate-y-4');
+                  }, 800);
+                  
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.2 });
+            
+            const betaForm = document.getElementById('beta-form');
+            if (betaForm) {
+              observer.observe(betaForm);
+            }
+          });
+        `
+      }} />
 
       {/* Footer with Animation */}
       <motion.div

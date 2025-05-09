@@ -144,332 +144,582 @@ export default function Contact() {
   };
 
   return (
-    <PageTransition>
+    <div className={`${spaceGrotesk.variable} ${outfit.variable} font-sans`}>
       <Header />
-      <main className={`min-h-screen bg-gradient-to-b from-gray-50 to-white ${spaceGrotesk.variable} ${outfit.variable} font-sans mt-16`}>
+      <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 bg-gradient-to-br from-purple-700 via-indigo-600 to-purple-500 text-white">
-          <div className="container mx-auto px-4">
-            <motion.div 
-              className="max-w-3xl mx-auto text-center"
+        <motion.section 
+          className="min-h-[60vh] flex flex-col items-center justify-center pt-32 pb-20 px-4 bg-gradient-to-br from-purple-900 via-indigo-800 to-purple-800 text-white relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(20)].map((_, i) => (
+              <motion.div 
+                key={i}
+                className="absolute w-1 h-1 md:w-2 md:h-2 rounded-full bg-purple-300 opacity-30"
+                style={{
+                  left: `${(i * 5) % 100}%`,
+                  top: `${(i * 7) % 100}%`,
+                }}
+                animate={{
+                  y: [0, -15, 0, 15, 0],
+                  x: [0, 15, 0, -15, 0],
+                  scale: [1, 1.2, 1, 0.8, 1],
+                  opacity: [0.2, 0.5, 0.2, 0.5, 0.2],
+                }}
+                transition={{
+                  duration: 8 + (i % 5),
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
+            <motion.h1 
+              className={`${spaceGrotesk.className} text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-white tracking-tight`}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Contact Us
+            </motion.h1>
+            
+            <motion.p 
+              className={`${outfit.className} text-xl text-purple-50/90 max-w-2xl mx-auto mb-8`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h1 className={`${spaceGrotesk.className} text-4xl md:text-6xl font-bold mb-6`}>
-                Contact Us
-              </h1>
-              <p className={`${outfit.className} text-xl text-white/80`}>
-                Get in touch with our team or join our beta program
-              </p>
+              Get in touch with our team or join our beta program to help shape the future of road monitoring
+            </motion.p>
+
+            <motion.div
+              className="flex flex-wrap justify-center gap-3 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              {['Questions', 'Support', 'Feedback', 'Beta Access'].map((tag, i) => (
+                <motion.span 
+                  key={i}
+                  className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium border border-white/20"
+                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.2)' }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {tag}
+                </motion.span>
+              ))}
             </motion.div>
           </div>
-          
+
+          {/* Animated scroll indicator */}
+          <motion.div 
+            className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
+            animate={{ 
+              y: [0, 10, 0],
+              opacity: [0.4, 0.8, 0.4]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity,
+              repeatType: "reverse" 
+            }}
+          >
+            <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+              <motion.div 
+                className="w-1.5 h-1.5 bg-white rounded-full mt-2"
+                animate={{ 
+                  y: [0, 12, 0]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity,
+                  repeatType: "reverse" 
+                }}
+              />
+            </div>
+          </motion.div>
+            
           {/* Wave Effect */}
           <div className="absolute -bottom-1 left-0 right-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-              <path fill="#ffffff" fillOpacity="1" d="M0,64L48,80C96,96,192,128,288,138.7C384,149,480,139,576,128C672,117,768,107,864,122.7C960,139,1056,181,1152,186.7C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+              <motion.path 
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.5, delay: 0.5 }}
+                fill="#ffffff" 
+                fillOpacity="1" 
+                d="M0,64L48,80C96,96,192,128,288,138.7C384,149,480,139,576,128C672,117,768,107,864,122.7C960,139,1056,181,1152,186.7C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              ></motion.path>
             </svg>
           </div>
-        </section>
+        </motion.section>
 
         {/* Contact Section */}
         <section className="py-20">
           <div className="container mx-auto px-4">
-            <ScrollAnimation threshold={0.1}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {/* Contact Form */}
-                <ScrollAnimation direction="right" delay={0.2} className="bg-white rounded-2xl p-8 shadow-lg">
-                  <AnimatedFormTitle className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
+              {/* Contact Form */}
+              <motion.div 
+                className="lg:col-span-3 bg-white rounded-2xl p-8 shadow-xl border border-gray-100"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="mb-8">
+                  <motion.h2 
+                    className={`${spaceGrotesk.className} text-2xl md:text-3xl font-bold mb-4 text-gray-900`}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
                     {formData.type === 'beta' ? 'Join Beta Program' : 'Send us a message'}
-                  </AnimatedFormTitle>
-                  <AnimatedForm onSubmit={handleSubmit} className="space-y-6">
-                    <AnimatedFormField custom={0}>
-                      <label htmlFor="type" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                        Form Type
-                      </label>
-                      <select
-                        id="type"
-                        name="type"
-                        value={formData.type}
+                  </motion.h2>
+                  <motion.p
+                    className={`${outfit.className} text-gray-600`}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    {formData.type === 'beta' 
+                      ? 'Be among the first to experience Tareeqi and help shape its future.' 
+                      : 'Have questions or feedback? We\'d love to hear from you.'}
+                  </motion.p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="flex flex-wrap gap-4 mb-6">
+                    <motion.div 
+                      className="flex-1 min-w-[100px] relative cursor-pointer overflow-hidden rounded-xl"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setFormData(prev => ({ ...prev, type: 'contact' }))}
+                    >
+                      <input 
+                        type="radio" 
+                        id="contact-type" 
+                        name="type" 
+                        value="contact"
+                        className="sr-only"
+                        checked={formData.type === 'contact'}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      />
+                      <label 
+                        htmlFor="contact-type" 
+                        className={`flex flex-col items-center justify-center p-4 h-full border-2 rounded-xl transition-all ${
+                          formData.type === 'contact' 
+                            ? 'bg-purple-50 border-purple-500 text-purple-900' 
+                            : 'bg-white border-gray-200 text-gray-700'
+                        }`}
                       >
-                        <option value="contact">Contact Form</option>
-                        <option value="beta">Beta Registration</option>
-                      </select>
-                    </AnimatedFormField>
-                    <AnimatedFormField custom={1}>
-                      <label htmlFor="name" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                        Name
+                        <FontAwesomeIcon 
+                          icon={faEnvelope} 
+                          className={`w-6 h-6 mb-2 ${formData.type === 'contact' ? 'text-purple-600' : 'text-gray-400'}`} 
+                        />
+                        <span className="font-medium">Contact Us</span>
                       </label>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="flex-1 min-w-[100px] relative cursor-pointer overflow-hidden rounded-xl"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setFormData(prev => ({ ...prev, type: 'beta' }))}
+                    >
+                      <input 
+                        type="radio" 
+                        id="beta-type" 
+                        name="type" 
+                        value="beta"
+                        className="sr-only"
+                        checked={formData.type === 'beta'}
+                        onChange={handleChange}
+                      />
+                      <label 
+                        htmlFor="beta-type" 
+                        className={`flex flex-col items-center justify-center p-4 h-full border-2 rounded-xl transition-all ${
+                          formData.type === 'beta' 
+                            ? 'bg-indigo-50 border-indigo-500 text-indigo-900' 
+                            : 'bg-white border-gray-200 text-gray-700'
+                        }`}
+                      >
+                        <FontAwesomeIcon 
+                          icon={faPhone} 
+                          className={`w-6 h-6 mb-2 ${formData.type === 'beta' ? 'text-indigo-600' : 'text-gray-400'}`} 
+                        />
+                        <span className="font-medium">Join Beta</span>
+                      </label>
+                    </motion.div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <motion.div 
+                      className="relative"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.1 }}
+                    >
                       <input
                         type="text"
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border ${
-                          errors.name ? 'border-red-500' : 'border-gray-300'
-                        } rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                        className={`peer w-full px-4 pt-6 pb-2 bg-gray-50 border-2 ${
+                          errors.name ? 'border-red-400' : formData.name ? 'border-green-400' : 'border-gray-200'
+                        } rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all`}
+                        placeholder=" "
                         required
                       />
+                      <label 
+                        htmlFor="name" 
+                        className="absolute top-2 left-4 text-xs text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs"
+                      >
+                        Your Name
+                      </label>
                       {errors.name && (
                         <motion.p 
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
-                          className="mt-1 text-sm text-red-500"
+                          className="mt-1 text-sm text-red-500 flex items-center"
                         >
+                          <span className="w-1 h-1 bg-red-500 rounded-full mr-2"></span>
                           {errors.name}
                         </motion.p>
                       )}
-                    </AnimatedFormField>
-                    <AnimatedFormField custom={2}>
-                      <label htmlFor="email" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                        Email
-                      </label>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="relative"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.2 }}
+                    >
                       <input
                         type="email"
                         id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border ${
-                          errors.email ? 'border-red-500' : 'border-gray-300'
-                        } rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                        className={`peer w-full px-4 pt-6 pb-2 bg-gray-50 border-2 ${
+                          errors.email ? 'border-red-400' : formData.email ? 'border-green-400' : 'border-gray-200'
+                        } rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all`}
+                        placeholder=" "
                         required
                       />
+                      <label 
+                        htmlFor="email" 
+                        className="absolute top-2 left-4 text-xs text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs"
+                      >
+                        Email Address
+                      </label>
                       {errors.email && (
                         <motion.p 
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
-                          className="mt-1 text-sm text-red-500"
+                          className="mt-1 text-sm text-red-500 flex items-center"
                         >
+                          <span className="w-1 h-1 bg-red-500 rounded-full mr-2"></span>
                           {errors.email}
                         </motion.p>
                       )}
-                    </AnimatedFormField>
-                    {formData.type === 'beta' ? (
-                      <AnimatedFormField custom={3}>
-                        <label htmlFor="phone" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                          Phone
-                        </label>
+                    </motion.div>
+                  </div>
+
+                  {formData.type === 'beta' ? (
+                    <motion.div 
+                      className="relative"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.3 }}
+                      key="phone-field"
+                    >
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className={`peer w-full px-4 pt-6 pb-2 bg-gray-50 border-2 ${
+                          errors.phone ? 'border-red-400' : formData.phone ? 'border-green-400' : 'border-gray-200'
+                        } rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all`}
+                        placeholder=" "
+                        required
+                      />
+                      <label 
+                        htmlFor="phone" 
+                        className="absolute top-2 left-4 text-xs text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs"
+                      >
+                        Phone Number
+                      </label>
+                      {errors.phone && (
+                        <motion.p 
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          className="mt-1 text-sm text-red-500 flex items-center"
+                        >
+                          <span className="w-1 h-1 bg-red-500 rounded-full mr-2"></span>
+                          {errors.phone}
+                        </motion.p>
+                      )}
+                    </motion.div>
+                  ) : (
+                    <>
+                      <motion.div 
+                        className="relative"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.3 }}
+                        key="subject-field"
+                      >
                         <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          value={formData.phone}
+                          type="text"
+                          id="subject"
+                          name="subject"
+                          value={formData.subject}
                           onChange={handleChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          className={`peer w-full px-4 pt-6 pb-2 bg-gray-50 border-2 ${
+                            errors.subject ? 'border-red-400' : formData.subject ? 'border-green-400' : 'border-gray-200'
+                          } rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all`}
+                          placeholder=" "
                           required
                         />
-                        {errors.phone && (
+                        <label 
+                          htmlFor="subject" 
+                          className="absolute top-2 left-4 text-xs text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs"
+                        >
+                          Subject
+                        </label>
+                        {errors.subject && (
                           <motion.p 
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
-                            className="mt-1 text-sm text-red-500"
+                            className="mt-1 text-sm text-red-500 flex items-center"
                           >
-                            {errors.phone}
+                            <span className="w-1 h-1 bg-red-500 rounded-full mr-2"></span>
+                            {errors.subject}
                           </motion.p>
                         )}
-                      </AnimatedFormField>
+                      </motion.div>
+                      
+                      <motion.div 
+                        className="relative"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.4 }}
+                        key="message-field"
+                      >
+                        <textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          rows={4}
+                          className={`peer w-full px-4 pt-6 pb-2 bg-gray-50 border-2 ${
+                            errors.message ? 'border-red-400' : formData.message ? 'border-green-400' : 'border-gray-200'
+                          } rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all resize-none`}
+                          placeholder=" "
+                          required
+                        ></textarea>
+                        <label 
+                          htmlFor="message" 
+                          className="absolute top-2 left-4 text-xs text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs"
+                        >
+                          Your Message
+                        </label>
+                        {errors.message && (
+                          <motion.p 
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            className="mt-1 text-sm text-red-500 flex items-center"
+                          >
+                            <span className="w-1 h-1 bg-red-500 rounded-full mr-2"></span>
+                            {errors.message}
+                          </motion.p>
+                        )}
+                      </motion.div>
+                    </>
+                  )}
+
+                  <motion.button
+                    type="submit"
+                    className={`w-full py-4 px-6 ${
+                      formData.type === 'beta' 
+                        ? 'bg-gradient-to-r from-indigo-600 to-blue-600' 
+                        : 'bg-gradient-to-r from-purple-600 to-indigo-600'
+                    } text-white font-semibold rounded-xl shadow-lg hover:translate-y-[-2px] transition-all disabled:opacity-70`}
+                    disabled={isSubmitting}
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.5 }}
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                        <span>{formData.type === 'beta' ? 'Registering...' : 'Sending...'}</span>
+                      </div>
                     ) : (
-                      <>
-                        <AnimatedFormField custom={3}>
-                          <label htmlFor="subject" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                            Subject
-                          </label>
-                          <input
-                            type="text"
-                            id="subject"
-                            name="subject"
-                            value={formData.subject}
-                            onChange={handleChange}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            required
-                          />
-                          {errors.subject && (
-                            <motion.p 
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              className="mt-1 text-sm text-red-500"
-                            >
-                              {errors.subject}
-                            </motion.p>
-                          )}
-                        </AnimatedFormField>
-                        <AnimatedFormField custom={4}>
-                          <label htmlFor="message" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                            Message
-                          </label>
-                          <textarea
-                            id="message"
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            rows={4}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            required
-                          />
-                          {errors.message && (
-                            <motion.p 
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              className="mt-1 text-sm text-red-500"
-                            >
-                              {errors.message}
-                            </motion.p>
-                          )}
-                        </AnimatedFormField>
-                      </>
+                      <span>{formData.type === 'beta' ? 'Register for Beta Access' : 'Send Message'}</span>
                     )}
-                    {submitStatus.type !== 'idle' && (
-                      <motion.div 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`p-4 rounded-lg transition-all duration-500 transform ${
-                          submitStatus.type === 'success' 
-                            ? 'bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30' 
-                            : 'bg-gradient-to-r from-red-500/20 to-rose-500/20 border border-red-500/30'
-                        } animate-fade-in-up backdrop-blur-sm`}
-                      >
-                        <div className="flex items-center gap-3">
-                          {submitStatus.type === 'success' ? (
-                            <div className="flex-shrink-0">
-                              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-green-500/20">
-                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="flex-shrink-0">
-                              <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-500 rounded-full flex items-center justify-center animate-shake shadow-lg shadow-red-500/20">
-                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                                </svg>
-                              </div>
-                            </div>
-                          )}
-                          <p className="text-sm font-medium text-white drop-shadow-sm">{submitStatus.message}</p>
-                        </div>
-                      </motion.div>
-                    )}
-                    <AnimatedSubmitButton
-                      className={`w-full bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group`}
-                    >
-                      <span className={`relative z-10 ${isSubmitting ? 'opacity-0' : 'opacity-100'} transition-opacity`}>
-                        {isSubmitting ? 'Sending...' : formData.type === 'beta' ? 'Join Beta Program' : 'Send Message'}
-                      </span>
-                      {isSubmitting && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        </div>
-                      )}
-                    </AnimatedSubmitButton>
-                  </AnimatedForm>
-                </ScrollAnimation>
+                  </motion.button>
 
-                {/* Contact Information */}
-                <div className="space-y-8">
-                  <ScrollAnimation direction="left" className="bg-white rounded-2xl p-8 shadow-lg">
-                    <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
-                      Contact Information
-                    </h2>
-                    <div className="space-y-6">
-                      <motion.div 
-                        className="flex items-start space-x-4"
-                        whileHover={{ x: 5 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        <motion.div 
-                          className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                        >
-                          <FontAwesomeIcon icon={faEnvelope} className="w-6 h-6 text-purple-600" />
-                        </motion.div>
-                        <div>
-                          <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
-                            Email
-                          </h3>
-                          <p className={`${outfit.className} text-gray-600`}>
-                          tareeqiapp@gmail.com
-                          </p>
-                        </div>
-                      </motion.div>
-                      <motion.div 
-                        className="flex items-start space-x-4"
-                        whileHover={{ x: 5 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        <motion.div 
-                          className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                        >
-                          <FontAwesomeIcon icon={faPhone} className="w-6 h-6 text-purple-600" />
-                        </motion.div>
-                        <div>
-                          <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
-                            Phone
-                          </h3>
-                          <p className={`${outfit.className} text-gray-600`}>
-                            +966 552626165
-                          </p>
-                        </div>
-                      </motion.div>
-                      <motion.div 
-                        className="flex items-start space-x-4"
-                        whileHover={{ x: 5 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        <motion.div 
-                          className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                        >
-                          <FontAwesomeIcon icon={faMapMarkerAlt} className="w-6 h-6 text-purple-600" />
-                        </motion.div>
-                        <div>
-                          <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
-                            Location
-                          </h3>
-                          <p className={`${outfit.className} text-gray-600`}>
-                            Jouf University<br />
-                            College of Computer and Information Sciences<br />
-                            Sakaka, Saudi Arabia
-                          </p>
-                        </div>
-                      </motion.div>
-                    </div>
-                  </ScrollAnimation>
-
-                  {/* Map Section */}
-                  <ScrollAnimation direction="up" delay={0.3} className="bg-white rounded-2xl p-8 shadow-lg">
-                    <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
-                      Find Us
-                    </h2>
+                  {submitStatus.type !== 'idle' && (
                     <motion.div 
-                      className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 150 }}
+                      className={`p-4 rounded-xl ${
+                        submitStatus.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+                      }`}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.1234567890123!2d40.1816113471303!3d29.960050790146333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDU3JzM2LjIiTiA0MMKwMTAnNTMuOCJF!5e0!3m2!1sen!2ssa!4v1234567890123!5m2!1sen!2ssa"
-                        width="100%"
-                        height="300"
-                        style={{ border: 0 }}
-                        allowFullScreen
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                      />
+                      <div className="flex">
+                        <div className={`w-6 h-6 rounded-full ${
+                          submitStatus.type === 'success' ? 'bg-green-100 text-green-500' : 'bg-red-100 text-red-500'
+                        } flex items-center justify-center mr-3 flex-shrink-0`}>
+                          {submitStatus.type === 'success' ? '✓' : '✕'}
+                        </div>
+                        <p>{submitStatus.message}</p>
+                      </div>
                     </motion.div>
-                  </ScrollAnimation>
+                  )}
+                </form>
+              </motion.div>
+
+              {/* Contact Information */}
+              <motion.div 
+                className="lg:col-span-2 bg-gradient-to-br from-purple-900 via-indigo-800 to-purple-800 text-white rounded-2xl p-8 shadow-xl relative overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {/* Decorative particles */}
+                <div className="absolute inset-0 overflow-hidden">
+                  {[...Array(10)].map((_, i) => (
+                    <motion.div 
+                      key={i}
+                      className="absolute w-1 h-1 md:w-2 md:h-2 rounded-full bg-white opacity-20"
+                      style={{
+                        left: `${(i * 8) % 100}%`,
+                        top: `${(i * 11) % 100}%`,
+                      }}
+                      animate={{
+                        y: [0, -10, 0, 10, 0],
+                        opacity: [0.1, 0.3, 0.1, 0.3, 0.1],
+                      }}
+                      transition={{
+                        duration: 5 + (i % 3),
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                      }}
+                    />
+                  ))}
                 </div>
-              </div>
-            </ScrollAnimation>
+
+                <div className="relative z-10">
+                  <motion.h3 
+                    className={`${spaceGrotesk.className} text-2xl font-bold mb-6`}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    Get in Touch
+                  </motion.h3>
+                  
+                  <div className="space-y-6 mb-8">
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.4 }}
+                    >
+                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                        <FontAwesomeIcon icon={faEnvelope} className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-medium mb-1">Email Us</h4>
+                        <p className="text-purple-200">tareeqiapp@gmail.com</p>
+                      </div>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                        <FontAwesomeIcon icon={faPhone} className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-medium mb-1">Call Us</h4>
+                        <p className="text-purple-200">+966 123 456 7890</p>
+                      </div>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.6 }}
+                    >
+                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                        <FontAwesomeIcon icon={faMapMarkerAlt} className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-medium mb-1">Visit Us</h4>
+                        <p className="text-purple-200">Jouf University, Sakaka, Saudi Arabia</p>
+                      </div>
+                    </motion.div>
+                  </div>
+                  
+                  <div className="border-t border-white/10 pt-6">
+                    <h4 className="text-white font-medium mb-4">Connect with us</h4>
+                    <div className="flex gap-4">
+                      {['Twitter', 'LinkedIn', 'Instagram', 'GitHub'].map((social, i) => (
+                        <motion.a 
+                          key={i}
+                          href="#"
+                          className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          {social.charAt(0)}
+                        </motion.a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
       </main>
       <Footer />
-    </PageTransition>
+    </div>
   );
 } 

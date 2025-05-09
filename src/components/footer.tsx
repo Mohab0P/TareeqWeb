@@ -166,40 +166,6 @@ export default function Footer() {
               <FontAwesomeIcon icon={faRoad} className="w-6 h-6 text-purple-400" />
             </motion.div>
 
-            {/* Social Media Links */}
-            <motion.div 
-              className="flex space-x-4 mt-6"
-              variants={itemVariants}
-            >
-              {[
-                { icon: faTwitter, name: 'twitter', color: '#1DA1F2' },
-                { icon: faFacebook, name: 'facebook', color: '#4267B2' },
-                { icon: faInstagram, name: 'instagram', color: '#E1306C' },
-                { icon: faLinkedin, name: 'linkedin', color: '#0077B5' },
-                { icon: faGithub, name: 'github', color: '#333' }
-              ].map((social) => (
-                <motion.a
-                  key={social.name}
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center relative overflow-hidden group"
-                  onMouseEnter={() => setHoveredIcon(social.name)}
-                  onMouseLeave={() => setHoveredIcon(null)}
-                  whileHover="hover"
-                  variants={socialIconVariants}
-                >
-                  <motion.div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ backgroundColor: social.color }}
-                    initial={{ scale: 0 }}
-                    animate={{ 
-                      scale: hoveredIcon === social.name ? 1 : 0,
-                      transition: { duration: 0.3 }
-                    }}
-                  />
-                  <FontAwesomeIcon icon={social.icon} className="w-5 h-5 text-gray-300 group-hover:text-white relative z-10" />
-                </motion.a>
-              ))}
-            </motion.div>
           </motion.div>
 
           {/* Quick Links */}
@@ -390,20 +356,20 @@ export default function Footer() {
             key={i}
             className="absolute rounded-full bg-purple-600 opacity-10"
             style={{ 
-              width: Math.random() * 10 + 5, 
-              height: Math.random() * 10 + 5,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`
+              width: 5 + (i % 10),
+              height: 5 + ((i + 3) % 10),
+              top: `${(i * 5) % 100}%`,
+              left: `${(i * 7) % 100}%`
             }}
             animate={{
               y: [0, -30, 0],
               opacity: [0.05, 0.1, 0.05]
             }}
             transition={{
-              duration: Math.random() * 5 + 3,
+              duration: 3 + (i % 5),
               repeat: Infinity,
               repeatType: "reverse",
-              delay: Math.random() * 5
+              delay: i * 0.2
             }}
           />
         ))}
