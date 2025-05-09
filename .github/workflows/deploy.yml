@@ -39,6 +39,14 @@ jobs:
 
       - name: Build
         run: npm run build
+      
+      - name: Copy assets to out directory
+        run: |
+          mkdir -p out/public
+          cp -r public/* out/
+      
+      - name: Create .nojekyll file
+        run: touch out/.nojekyll
 
       - name: Configure Pages
         uses: actions/configure-pages@v4

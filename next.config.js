@@ -3,7 +3,7 @@ const nextConfig = {
   /**
    * Enable static exports for GitHub Pages
    */
-  output: 'export',
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   
   /**
    * Set the build output directory
@@ -12,8 +12,15 @@ const nextConfig = {
   
   /**
    * Set base path to the slug of your GitHub repository
+   * Only in production, not in development
    */
-  basePath: '/TareeqWeb',
+  basePath: process.env.NODE_ENV === 'production' ? '/TareeqWeb' : '',
+  
+  /**
+   * Make assets use relative paths rather than absolute paths
+   * for GitHub Pages compatibility
+   */
+  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
   
   /**
    * Disable server-based image optimization as GitHub Pages

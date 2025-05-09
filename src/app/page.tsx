@@ -11,6 +11,7 @@ import { faStar, faUser, faClock, faSearch, faFilter, faTags, faChevronDown, faB
 import { faTwitter, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardMedia, CardBadge } from '@/components/ui/card';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { getImagePath } from '@/lib/utils';
 
 // Custom font setup
 const spaceGrotesk = Space_Grotesk({
@@ -172,7 +173,7 @@ export default function Home() {
         </motion.div>
         
         {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-soft-light"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-700/10 via-transparent to-blue-600/10 opacity-30 mix-blend-soft-light"></div>
         
         {/* Left side text - vertical */}
         <div className="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 items-center -rotate-90 origin-center">
@@ -208,7 +209,7 @@ export default function Home() {
               {/* App logo */}
               <div className="w-12 h-12 bg-white rounded-full p-2 mr-3 flex items-center justify-center shadow-lg">
                 <Image 
-                  src="/logo.png" 
+                  src="logo.png"
                   alt="Tareeqi Logo" 
                   width={50} 
                   height={50} 
@@ -367,7 +368,13 @@ export default function Home() {
                     }}
                     className="w-full h-full relative"
                   >
-                    <Image src="/phone1.png" alt="Tareeqi App Dashboard" fill className="object-cover" priority />
+                    <Image 
+                      src="phone1.png"
+                      alt="Tareeqi App Dashboard" 
+                      fill 
+                      className="object-cover" 
+                      priority 
+                    />
                     
                     {/* Interactive overlay elements */}
                     <motion.div 
@@ -548,7 +555,13 @@ export default function Home() {
                     }}
                     className="w-full h-full relative"
                   >
-                    <Image src="/phone3.png" alt="Tareeqi App Road Analysis" fill className="object-cover" priority />
+                    <Image 
+                      src="phone3.png"
+                      alt="Tareeqi App Road Analysis" 
+                      fill 
+                      className="object-cover" 
+                      priority 
+                    />
                     
                     {/* Interactive overlay elements */}
                     <motion.div 

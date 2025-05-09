@@ -439,7 +439,7 @@ export default function Features() {
       {/* Interactive Demo Section */}
       <section className="py-20 bg-gradient-to-br from-purple-900 via-indigo-800 to-purple-800 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute w-full h-full bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
+          <div className="absolute w-full h-full bg-gradient-to-br from-gray-900/10 via-transparent to-gray-800/10 opacity-30 mix-blend-overlay"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">

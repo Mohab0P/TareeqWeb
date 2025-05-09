@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { getImagePath } from '@/lib/utils';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -120,7 +121,7 @@ export default function Header() {
                 variants={logoVariants}
               >
                 <Image 
-                  src="/logo.png" 
+                  src="logo.png"
                   alt="Tareeqi Logo" 
                   width={40} 
                   height={40} 
