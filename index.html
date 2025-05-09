@@ -3,266 +3,289 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tareeqi - Road Monitoring App | Home</title>
+    <title>Tareeqi - Road Monitoring App</title>
     <style>
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        background: linear-gradient(to bottom right, #5a3b8a, #3c2a66);
-        color: white;
+      * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        min-height: 100vh;
       }
-      .header {
-        padding: 1.5rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(8px);
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: #333;
+        line-height: 1.6;
       }
-      .logo {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
+      
+      a {
         text-decoration: none;
       }
-      .logo-img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #fff;
-        overflow: hidden;
-      }
-      .logo-text {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: white;
-      }
-      .nav {
-        display: flex;
-        gap: 2rem;
-      }
-      .nav-link {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-      .nav-link:hover {
-        color: white;
-      }
-      .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 10rem 2rem 5rem;
-        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
-      }
+      
       .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 20px;
       }
-      h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1.5rem;
-        background: linear-gradient(to right, #ffffff, #e0e0e0);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+      
+      .header {
+        background-color: #5a3b8a;
+        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
       }
-      .tagline {
-        font-size: 1.5rem;
-        margin-bottom: 2.5rem;
-        max-width: 800px;
-        opacity: 0.9;
-        line-height: 1.6;
-      }
-      .buttons {
+      
+      .header-container {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 2rem;
+        justify-content: space-between;
+        align-items: center;
       }
-      .button {
-        background-color: white;
-        color: #5a3b8a;
-        padding: 0.75rem 2rem;
-        border-radius: 0.5rem;
-        text-decoration: none;
-        font-weight: bold;
-        transition: all 0.3s ease;
+      
+      .logo {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 10px;
       }
-      .button.primary {
-        background-color: #7c4dff;
-        color: white;
+      
+      .logo img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
       }
-      .button:hover {
+      
+      .logo-text {
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      
+      .nav {
+        display: flex;
+        gap: 20px;
+      }
+      
+      .nav-link {
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s;
+      }
+      
+      .nav-link:hover {
+        color: #fff;
+      }
+      
+      .hero {
+        background: linear-gradient(135deg, #5a3b8a 0%, #3c2a66 100%);
+        color: #fff;
+        padding: 80px 0;
+        text-align: center;
+      }
+      
+      .hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+      
+      .hero p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto 40px;
+        opacity: 0.9;
+      }
+      
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: all 0.3s;
+      }
+      
+      .btn-primary {
+        background-color: #fff;
+        color: #5a3b8a;
+        margin-right: 10px;
+      }
+      
+      .btn-secondary {
+        background-color: transparent;
+        color: #fff;
+        border: 2px solid #fff;
+      }
+      
+      .btn:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       }
+      
       .features {
-        padding: 5rem 0;
-        background-color: white;
-        color: #333;
+        padding: 80px 0;
+        background-color: #f8f9fa;
       }
+      
       .section-title {
         text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
+        font-size: 36px;
+        margin-bottom: 60px;
         color: #5a3b8a;
       }
+      
       .feature-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
+        gap: 30px;
       }
+      
       .feature-card {
-        background-color: #f8f9fa;
-        border-radius: 1rem;
-        padding: 2rem;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 30px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease;
+        transition: transform 0.3s;
       }
+      
       .feature-card:hover {
         transform: translateY(-10px);
       }
+      
       .feature-icon {
         width: 60px;
         height: 60px;
-        background-color: #7c4dff;
-        border-radius: 12px;
+        background-color: #5a3b8a;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 20px;
       }
+      
       .feature-icon img {
         width: 30px;
-        height: 30px;
+        filter: brightness(0) invert(1);
       }
+      
       .feature-title {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
+        font-size: 24px;
+        margin-bottom: 15px;
         color: #5a3b8a;
       }
-      .feature-description {
-        color: #666;
-        line-height: 1.6;
-      }
-      .screenshot-section {
-        padding: 5rem 0;
-        background-color: #f0f2f5;
-      }
+      
       .screenshots {
+        padding: 80px 0;
+        background-color: #fff;
+      }
+      
+      .screenshot-grid {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        margin-top: 3rem;
-        overflow-x: auto;
-        padding-bottom: 2rem;
+        gap: 30px;
+        flex-wrap: wrap;
       }
+      
       .screenshot {
-        border-radius: 1.5rem;
-        overflow: hidden;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        transition: transform 0.3s ease;
         max-width: 300px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
       }
+      
       .screenshot:hover {
         transform: scale(1.05);
       }
+      
       .screenshot img {
         width: 100%;
-        height: auto;
         display: block;
       }
-      .team-section {
-        padding: 5rem 0;
+      
+      .team {
+        padding: 80px 0;
         background-color: #5a3b8a;
-        color: white;
+        color: #fff;
       }
+      
+      .team .section-title {
+        color: #fff;
+      }
+      
       .team-grid {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 2rem;
-        margin-top: 3rem;
+        gap: 30px;
       }
+      
       .team-member {
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 1rem;
-        padding: 2rem;
-        text-align: center;
         width: 200px;
+        text-align: center;
       }
+      
       .team-photo {
         width: 120px;
         height: 120px;
         border-radius: 50%;
         overflow: hidden;
-        margin: 0 auto 1.5rem;
+        margin: 0 auto 20px;
         border: 3px solid rgba(255, 255, 255, 0.3);
       }
+      
       .team-photo img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
+      
       .team-name {
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
+        font-size: 18px;
+        margin-bottom: 5px;
       }
+      
       .team-role {
-        font-size: 0.9rem;
+        font-size: 14px;
         opacity: 0.8;
-        margin-bottom: 1rem;
       }
-      footer {
-        background-color: #2a1a46;
+      
+      .footer {
+        background-color: #3c2a66;
         color: rgba(255, 255, 255, 0.7);
-        padding: 3rem 0;
+        padding: 50px 0;
         text-align: center;
       }
+      
       .footer-links {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        margin-bottom: 2rem;
+        gap: 30px;
+        margin-bottom: 30px;
       }
+      
       .footer-link {
         color: rgba(255, 255, 255, 0.7);
-        text-decoration: none;
       }
+      
       .footer-link:hover {
-        color: white;
+        color: #fff;
       }
+      
       @media (max-width: 768px) {
-        .nav {
-          display: none;
+        .header-container {
+          flex-direction: column;
+          gap: 20px;
         }
-        h1 {
-          font-size: 2.5rem;
+        
+        .hero h1 {
+          font-size: 36px;
         }
-        .tagline {
-          font-size: 1.2rem;
+        
+        .hero p {
+          font-size: 18px;
         }
-        .screenshot-section {
-          padding: 3rem 0;
+        
+        .feature-grid, .team-grid {
+          grid-template-columns: 1fr;
         }
-        .screenshots {
+        
+        .screenshot-grid {
           flex-direction: column;
           align-items: center;
         }
@@ -271,27 +294,27 @@
   </head>
   <body>
     <header class="header">
-      <a href="/TareeqWeb/" class="logo">
-        <div class="logo-img">
-          <img src="/TareeqWeb/logo.png" alt="Tareeqi Logo" width="40" height="40">
-        </div>
-        <span class="logo-text">Tareeqi</span>
-      </a>
-      <nav class="nav">
-        <a href="/TareeqWeb/features.html" class="nav-link">Features</a>
-        <a href="/TareeqWeb/how-it-works.html" class="nav-link">How It Works</a>
-        <a href="/TareeqWeb/about.html" class="nav-link">About</a>
-        <a href="/TareeqWeb/contact.html" class="nav-link">Contact</a>
-      </nav>
+      <div class="container header-container">
+        <a href="/TareeqWeb/" class="logo">
+          <img src="/TareeqWeb/logo.png" alt="Tareeqi Logo">
+          <span class="logo-text">Tareeqi</span>
+        </a>
+        <nav class="nav">
+          <a href="/TareeqWeb/features.html" class="nav-link">Features</a>
+          <a href="/TareeqWeb/how-it-works.html" class="nav-link">How It Works</a>
+          <a href="/TareeqWeb/about.html" class="nav-link">About</a>
+          <a href="/TareeqWeb/contact.html" class="nav-link">Contact</a>
+        </nav>
+      </div>
     </header>
 
     <section class="hero">
       <div class="container">
         <h1>Transform Road Monitoring with AI</h1>
-        <p class="tagline">Tareeqi uses cutting-edge technology to assess road quality using only smartphone sensors. Join us in making roads safer and smarter for everyone.</p>
-        <div class="buttons">
-          <a href="/TareeqWeb/features.html" class="button primary">Explore Features</a>
-          <a href="/TareeqWeb/about.html" class="button">Learn More</a>
+        <p>Tareeqi uses cutting-edge technology to assess road quality using only smartphone sensors. Join us in making roads safer and smarter for everyone.</p>
+        <div>
+          <a href="/TareeqWeb/features.html" class="btn btn-primary">Explore Features</a>
+          <a href="/TareeqWeb/about.html" class="btn btn-secondary">Learn More</a>
         </div>
       </div>
     </section>
@@ -305,30 +328,30 @@
               <img src="/TareeqWeb/assets/icon-smartphone.svg" alt="Smartphone Icon">
             </div>
             <h3 class="feature-title">Smartphone Sensing</h3>
-            <p class="feature-description">Uses built-in smartphone sensors to detect road anomalies without requiring specialized hardware.</p>
+            <p>Uses built-in smartphone sensors to detect road anomalies without requiring specialized hardware.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <img src="/TareeqWeb/assets/icon-ai.svg" alt="AI Icon">
             </div>
             <h3 class="feature-title">AI-Powered Analysis</h3>
-            <p class="feature-description">Advanced machine learning algorithms assess road quality and identify issues in real-time.</p>
+            <p>Advanced machine learning algorithms assess road quality and identify issues in real-time.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <img src="/TareeqWeb/assets/icon-map.svg" alt="Map Icon">
             </div>
             <h3 class="feature-title">Interactive Maps</h3>
-            <p class="feature-description">Visualize road quality data on intuitive maps showing problem areas and maintenance priorities.</p>
+            <p>Visualize road quality data on intuitive maps showing problem areas and maintenance priorities.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="screenshot-section">
+    <section class="screenshots">
       <div class="container">
         <h2 class="section-title">App Screenshots</h2>
-        <div class="screenshots">
+        <div class="screenshot-grid">
           <div class="screenshot">
             <img src="/TareeqWeb/phone1.png" alt="Tareeqi App Screenshot 1">
           </div>
@@ -342,7 +365,7 @@
       </div>
     </section>
 
-    <section class="team-section">
+    <section class="team">
       <div class="container">
         <h2 class="section-title">Meet Our Team</h2>
         <div class="team-grid">
@@ -385,7 +408,7 @@
       </div>
     </section>
 
-    <footer>
+    <footer class="footer">
       <div class="container">
         <div class="footer-links">
           <a href="/TareeqWeb/features.html" class="footer-link">Features</a>
