@@ -20,7 +20,7 @@ const nextConfig = {
    * Make assets use relative paths rather than absolute paths
    * for GitHub Pages compatibility
    */
-  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/TareeqWeb' : '',
   
   /**
    * Disable server-based image optimization as GitHub Pages
