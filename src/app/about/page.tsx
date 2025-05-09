@@ -25,31 +25,31 @@ const teamMembers = [
   {
     name: "Bahaa AlSulaiman",
     role: "Team Lead/Mobile Developer",
-    image: "/bahaa.png",
+    image: "bahaa.png",
     bio: "Leads the team with expertise in mobile app development and project management."
   },
   {
     name: "Moath Algahtani",
     role: "AI Developer",
-    image: "/moath.png",
+    image: "moath.png",
     bio: "Expert in machine learning models and AI implementation for road anomaly detection."
   },
   {
     name: "Zaid Alshahrari",
     role: "System Analyst",
-    image: "/zaid.png",
+    image: "zaid.png",
     bio: "Analyzes complex systems requirements and designs efficient software architectures."
   },
   {
     name: "Sulaimman Alshamri",
     role: "Full Stack Developer",
-    image: "/sulaiman.png",
+    image: "sulaiman.png",
     bio: "Creates seamless experiences across both front-end and back-end technologies."
   },
   {
     name: "Mohab Alraddadi",
     role: "Mobile Developer/UI/UX Designer",
-    image: "/mohab.png",
+    image: "mohab.png",
     bio: "Designs intuitive interfaces and develops elegant mobile solutions."
   }
 ];
@@ -600,10 +600,10 @@ export default function About() {
               to create solutions that make a real difference in our communities and align with Saudi Arabia's Vision 2030.
             </p>
             
-            <div className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md">
+            <a href="https://ju.edu.sa/ar" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md">
               <FontAwesomeIcon icon={faGlobe} className="w-5 h-5"  />
               Visit University Website
-            </div>
+            </a>
           </motion.div>
         </div>
       </section>

@@ -45,6 +45,17 @@ const response = await fetch('https://formspree.io/f/YOUR_NEW_FORMSPREE_ID', {
 
 This project is configured for GitHub Pages deployment using GitHub Actions. When you push to the main branch, it will automatically build and deploy to GitHub Pages.
 
+### Build Process
+
+The build process includes several steps to ensure compatibility with GitHub Pages:
+
+1. **Next.js Build**: Compiles the application for production
+2. **Copy Public Assets**: Copies all files from the `/public` directory to the output directory
+3. **Create .nojekyll**: Creates a `.nojekyll` file to prevent GitHub Pages from using Jekyll
+4. **Fix Image Paths**: Converts all absolute paths to relative paths in HTML files
+
+The last step is crucial for GitHub Pages, as it ensures all assets (images, styles, scripts) use relative paths rather than absolute paths.
+
 ### Important Notes:
 
 - All images use relative paths to work correctly on GitHub Pages
