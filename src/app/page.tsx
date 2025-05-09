@@ -282,6 +282,31 @@ export default function Home() {
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-500 opacity-20 blur-[100px] rounded-full"></div>
             <div className="absolute left-1/3 top-1/3 w-[300px] h-[300px] bg-indigo-400 opacity-15 blur-[80px] rounded-full"></div>
             
+            {/* Animated background particles */}
+            <motion.div className="absolute inset-0 overflow-hidden opacity-40">
+              {[...Array(20)].map((_, i) => (
+                <motion.div 
+                  key={i}
+                  className="absolute w-1 h-1 md:w-2 md:h-2 rounded-full bg-purple-200"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [0, -10, 0, 10, 0],
+                    x: [0, 10, 0, -10, 0],
+                    scale: [1, 1.5, 1, 0.8, 1],
+                    opacity: [0.4, 0.8, 0.4, 0.6, 0.4],
+                  }}
+                  transition={{
+                    duration: 5 + Math.random() * 5,
+                    repeat: Infinity,
+                    delay: Math.random() * 5,
+                  }}
+                />
+              ))}
+            </motion.div>
+            
             {/* Phones Container with Enhanced Animations */}
             <motion.div 
               initial={{ opacity: 0 }}
@@ -289,12 +314,39 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-0 relative"
             >
+              {/* Connecting line between phones */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 0.7, scale: 1 }}
+                transition={{ duration: 1, delay: 1.2 }}
+                className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[2px] bg-gradient-to-r from-purple-500/0 via-purple-500/70 to-purple-500/0 z-0"
+              >
+                {/* Animated dots along the line */}
+                <motion.div 
+                  animate={{ 
+                    x: ['-100%', '100%'],
+                    scale: [0.8, 1.2, 0.8],
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    ease: "linear" 
+                  }}
+                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-purple-400 rounded-full shadow-lg shadow-purple-500/50"
+                />
+              </motion.div>
+
               {/* Left phone mockup */}
               <motion.div 
                 initial={{ opacity: 0, x: -100, rotate: -15 }}
                 animate={{ opacity: 1, x: 0, rotate: -8 }}
                 transition={{ duration: 1, delay: 0.7, type: "spring", stiffness: 100 }}
-                className="w-[280px] md:w-[380px] h-[560px] md:h-[760px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[-8deg] md:translate-x-14 z-10 mb-8 md:mb-0"
+                className="w-[300px] md:w-[420px] h-[600px] md:h-[840px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[-8deg] md:translate-x-14 z-10 mb-8 md:mb-0"
+                whileHover={{ 
+                  scale: 1.02, 
+                  rotate: -6,
+                  transition: { duration: 0.3 } 
+                }}
               >
                 {/* Phone frame elements */}
                 <div className="absolute w-40 h-6 bg-black top-0 left-1/2 transform -translate-x-1/2 rounded-b-2xl z-20"></div>
@@ -302,9 +354,74 @@ export default function Home() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.8 }}
-                  className="absolute w-[260px] md:w-[360px] h-[540px] md:h-[740px] inset-0 m-auto overflow-hidden rounded-3xl"
+                  className="absolute w-[280px] md:w-[400px] h-[580px] md:h-[820px] inset-0 m-auto overflow-hidden rounded-3xl"
                 >
-                  <Image src="/phone1.png" alt="Tareeqi App Dashboard" fill className="object-cover" priority />
+                  <motion.div
+                    animate={{ 
+                      y: [0, -10, 0],
+                    }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="w-full h-full relative"
+                  >
+                    <Image src="/phone1.png" alt="Tareeqi App Dashboard" fill className="object-cover" priority />
+                    
+                    {/* Interactive overlay elements */}
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 1.5 }}
+                      className="absolute inset-0 pointer-events-none"
+                    >
+                      {/* Pulsing notification */}
+                      <motion.div 
+                        className="absolute top-[25%] right-[20%] w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-xs font-bold"
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          boxShadow: [
+                            '0 0 0 0 rgba(139,92,246,0.7)',
+                            '0 0 0 10px rgba(139,92,246,0)',
+                            '0 0 0 0 rgba(139,92,246,0.7)'
+                          ]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <span className="text-white">3</span>
+                      </motion.div>
+                      
+                      {/* Highlight element */}
+                      <motion.div 
+                        className="absolute bottom-[20%] left-[15%] w-[35%] h-[5%] rounded-lg border-2 border-yellow-400"
+                        animate={{ opacity: [0.4, 0.8, 0.4] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                      />
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+
+                {/* Animated screen reflection overlay */}
+                <motion.div 
+                  className="absolute inset-0 rounded-[30px] overflow-hidden pointer-events-none"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.2 }}
+                  transition={{ duration: 1, delay: 1.2 }}
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-tr from-transparent via-white to-transparent opacity-10"
+                    animate={{
+                      left: ['-100%', '100%'],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatType: 'loop',
+                      ease: "easeInOut",
+                      delay: 2
+                    }}
+                  />
                 </motion.div>
 
                 {/* Desktop feature boxes */}
@@ -331,6 +448,26 @@ export default function Home() {
                     transition={{ duration: 2, repeat: Infinity }}
                     className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"
                   ></motion.div>
+                </motion.div>
+
+                {/* Animated highlight ring */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.2, duration: 0.6 }}
+                  className="absolute inset-[-6px] rounded-[46px] z-[-1]"
+                >
+                  <motion.div
+                    animate={{ 
+                      boxShadow: [
+                        '0 0 20px 5px rgba(139,92,246,0.3)', 
+                        '0 0 30px 5px rgba(139,92,246,0.6)', 
+                        '0 0 20px 5px rgba(139,92,246,0.3)'
+                      ] 
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-full h-full rounded-[46px]"
+                  />
                 </motion.div>
 
                 {/* Mobile feature boxes */}
@@ -384,7 +521,12 @@ export default function Home() {
                 initial={{ opacity: 0, x: 100, rotate: 15 }}
                 animate={{ opacity: 1, x: 0, rotate: 8 }}
                 transition={{ duration: 1, delay: 0.9, type: "spring", stiffness: 100 }}
-                className="w-[280px] md:w-[380px] h-[560px] md:h-[760px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[8deg] md:-translate-x-14 z-20"
+                className="w-[300px] md:w-[420px] h-[600px] md:h-[840px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[8deg] md:-translate-x-14 z-20"
+                whileHover={{ 
+                  scale: 1.02, 
+                  rotate: 6,
+                  transition: { duration: 0.3 } 
+                }}
               >
                 {/* Phone frame elements */}
                 <div className="absolute w-40 h-6 bg-black top-0 left-1/2 transform -translate-x-1/2 rounded-b-2xl z-20"></div>
@@ -392,9 +534,107 @@ export default function Home() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.8 }}
-                  className="absolute w-[260px] md:w-[360px] h-[540px] md:h-[740px] inset-0 m-auto overflow-hidden rounded-3xl"
+                  className="absolute w-[280px] md:w-[400px] h-[580px] md:h-[820px] inset-0 m-auto overflow-hidden rounded-3xl"
                 >
-                  <Image src="/phone3.png" alt="Tareeqi App Road Analysis" fill className="object-cover" priority />
+                  <motion.div
+                    animate={{ 
+                      y: [0, -10, 0],
+                    }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.5 // Slightly offset from the first phone
+                    }}
+                    className="w-full h-full relative"
+                  >
+                    <Image src="/phone3.png" alt="Tareeqi App Road Analysis" fill className="object-cover" priority />
+                    
+                    {/* Interactive overlay elements */}
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 1.8 }}
+                      className="absolute inset-0 pointer-events-none"
+                    >
+                      {/* Animated chart line */}
+                      <motion.div className="absolute bottom-[30%] left-[20%] w-[60%] h-[15%]">
+                        <svg width="100%" height="100%" viewBox="0 0 100 40" className="overflow-visible">
+                          <motion.path
+                            d="M 0,30 Q 15,10 30,25 T 60,15 T 100,20"
+                            fill="none"
+                            stroke="rgba(168,85,247,0.8)"
+                            strokeWidth="2"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 1 }}
+                            transition={{ duration: 2, delay: 0.5 }}
+                          />
+                          <motion.circle
+                            cx="0" cy="30" r="3"
+                            fill="#a855f7"
+                            animate={{ cx: [0, 100], cy: [30, 20] }}
+                            transition={{ duration: 3, delay: 2.5, repeat: Infinity, repeatType: "reverse" }}
+                          />
+                        </svg>
+                      </motion.div>
+                      
+                      {/* Moving indicator dot */}
+                      <motion.div 
+                        className="absolute top-[40%] right-[30%] w-4 h-4 rounded-full bg-green-500"
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          boxShadow: [
+                            '0 0 0 0 rgba(74,222,128,0.7)',
+                            '0 0 0 5px rgba(74,222,128,0)',
+                            '0 0 0 0 rgba(74,222,128,0.7)'
+                          ]
+                        }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: 0.7 }}
+                      />
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+
+                {/* Animated screen reflection overlay */}
+                <motion.div 
+                  className="absolute inset-0 rounded-[30px] overflow-hidden pointer-events-none"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.2 }}
+                  transition={{ duration: 1, delay: 1.5 }}
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-tr from-transparent via-white to-transparent opacity-10"
+                    animate={{
+                      left: ['-100%', '100%'],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatType: 'loop',
+                      ease: "easeInOut",
+                      delay: 3.5
+                    }}
+                  />
+                </motion.div>
+
+                {/* Animated highlight ring */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.2, duration: 0.6 }}
+                  className="absolute inset-[-6px] rounded-[46px] z-[-1]"
+                >
+                  <motion.div
+                    animate={{ 
+                      boxShadow: [
+                        '0 0 20px 5px rgba(139,92,246,0.3)', 
+                        '0 0 30px 5px rgba(139,92,246,0.6)', 
+                        '0 0 20px 5px rgba(139,92,246,0.3)'
+                      ] 
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    className="w-full h-full rounded-[46px]"
+                  />
                 </motion.div>
 
                 {/* Desktop feature boxes */}
@@ -467,6 +707,33 @@ export default function Home() {
                     </span>
                   </motion.div>
                 </motion.div>
+              </motion.div>
+
+              {/* Data flow animation between phones */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 2 }}
+                className="absolute hidden md:block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
+              >
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-2 h-2 rounded-full bg-purple-400 shadow-md shadow-purple-500/50"
+                    initial={{ x: -100, y: 0, opacity: 0 }}
+                    animate={{ 
+                      x: 100,
+                      y: (i * 10) - 20,
+                      opacity: [0, 1, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: i * 0.4,
+                      ease: "easeInOut"
+                    }}
+                  />
+                ))}
               </motion.div>
             </motion.div>
           </div>

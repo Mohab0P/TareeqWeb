@@ -6,6 +6,10 @@ import Footer from '@/components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { PageTransition } from '@/components/ui/page-transition';
+import { ScrollAnimation } from '@/components/ui/scroll-animation';
+import { AnimatedForm, AnimatedFormField, AnimatedFormTitle, AnimatedSubmitButton } from '@/components/ui/animated-form';
+import { motion } from 'framer-motion';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -140,20 +144,25 @@ export default function Contact() {
   };
 
   return (
-    <>
+    <PageTransition>
       <Header />
       <main className={`min-h-screen bg-gradient-to-b from-gray-50 to-white ${spaceGrotesk.variable} ${outfit.variable} font-sans mt-16`}>
         {/* Hero Section */}
         <section className="relative pt-32 pb-20 bg-gradient-to-br from-purple-700 via-indigo-600 to-purple-500 text-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
+            <motion.div 
+              className="max-w-3xl mx-auto text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               <h1 className={`${spaceGrotesk.className} text-4xl md:text-6xl font-bold mb-6`}>
                 Contact Us
               </h1>
               <p className={`${outfit.className} text-xl text-white/80`}>
                 Get in touch with our team or join our beta program
               </p>
-            </div>
+            </motion.div>
           </div>
           
           {/* Wave Effect */}
@@ -167,234 +176,300 @@ export default function Contact() {
         {/* Contact Section */}
         <section className="py-20">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Contact Form */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
-                  {formData.type === 'beta' ? 'Join Beta Program' : 'Send us a message'}
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="type" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                      Form Type
-                    </label>
-                    <select
-                      id="type"
-                      name="type"
-                      value={formData.type}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    >
-                      <option value="contact">Contact Form</option>
-                      <option value="beta">Beta Registration</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="name" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-2 border ${
-                        errors.name ? 'border-red-500' : 'border-gray-300'
-                      } rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
-                      required
-                    />
-                    {errors.name && (
-                      <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-                    )}
-                  </div>
-                  <div>
-                    <label htmlFor="email" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-2 border ${
-                        errors.email ? 'border-red-500' : 'border-gray-300'
-                      } rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
-                      required
-                    />
-                    {errors.email && (
-                      <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-                    )}
-                  </div>
-                  {formData.type === 'beta' ? (
-                    <div>
-                      <label htmlFor="phone" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                        Phone
+            <ScrollAnimation threshold={0.1}>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                {/* Contact Form */}
+                <ScrollAnimation direction="right" delay={0.2} className="bg-white rounded-2xl p-8 shadow-lg">
+                  <AnimatedFormTitle className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
+                    {formData.type === 'beta' ? 'Join Beta Program' : 'Send us a message'}
+                  </AnimatedFormTitle>
+                  <AnimatedForm onSubmit={handleSubmit} className="space-y-6">
+                    <AnimatedFormField custom={0}>
+                      <label htmlFor="type" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
+                        Form Type
                       </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
+                      <select
+                        id="type"
+                        name="type"
+                        value={formData.type}
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      >
+                        <option value="contact">Contact Form</option>
+                        <option value="beta">Beta Registration</option>
+                      </select>
+                    </AnimatedFormField>
+                    <AnimatedFormField custom={1}>
+                      <label htmlFor="name" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-2 border ${
+                          errors.name ? 'border-red-500' : 'border-gray-300'
+                        } rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
                         required
                       />
-                    </div>
-                  ) : (
-                    <>
-                      <div>
-                        <label htmlFor="subject" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                          Subject
+                      {errors.name && (
+                        <motion.p 
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          className="mt-1 text-sm text-red-500"
+                        >
+                          {errors.name}
+                        </motion.p>
+                      )}
+                    </AnimatedFormField>
+                    <AnimatedFormField custom={2}>
+                      <label htmlFor="email" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-2 border ${
+                          errors.email ? 'border-red-500' : 'border-gray-300'
+                        } rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
+                        required
+                      />
+                      {errors.email && (
+                        <motion.p 
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          className="mt-1 text-sm text-red-500"
+                        >
+                          {errors.email}
+                        </motion.p>
+                      )}
+                    </AnimatedFormField>
+                    {formData.type === 'beta' ? (
+                      <AnimatedFormField custom={3}>
+                        <label htmlFor="phone" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
+                          Phone
                         </label>
                         <input
-                          type="text"
-                          id="subject"
-                          name="subject"
-                          value={formData.subject}
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
                           onChange={handleChange}
                           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                           required
                         />
-                      </div>
-                      <div>
-                        <label htmlFor="message" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
-                          Message
-                        </label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          rows={4}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                          required
-                        />
-                      </div>
-                    </>
-                  )}
-                  {submitStatus.type !== 'idle' && (
-                    <div 
-                      className={`p-4 rounded-lg transition-all duration-500 transform ${
-                        submitStatus.type === 'success' 
-                          ? 'bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30' 
-                          : 'bg-gradient-to-r from-red-500/20 to-rose-500/20 border border-red-500/30'
-                      } animate-fade-in-up backdrop-blur-sm`}
-                    >
-                      <div className="flex items-center gap-3">
-                        {submitStatus.type === 'success' ? (
-                          <div className="flex-shrink-0">
-                            <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-green-500/20">
-                              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                              </svg>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex-shrink-0">
-                            <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-500 rounded-full flex items-center justify-center animate-shake shadow-lg shadow-red-500/20">
-                              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                              </svg>
-                            </div>
-                          </div>
+                        {errors.phone && (
+                          <motion.p 
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            className="mt-1 text-sm text-red-500"
+                          >
+                            {errors.phone}
+                          </motion.p>
                         )}
-                        <p className="text-sm font-medium text-white drop-shadow-sm">{submitStatus.message}</p>
-                      </div>
-                    </div>
-                  )}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
-                  >
-                    <span className={`relative z-10 ${isSubmitting ? 'opacity-0' : 'opacity-100'} transition-opacity`}>
-                      {isSubmitting ? 'Sending...' : formData.type === 'beta' ? 'Join Beta Program' : 'Send Message'}
-                    </span>
-                    {isSubmitting && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      </div>
+                      </AnimatedFormField>
+                    ) : (
+                      <>
+                        <AnimatedFormField custom={3}>
+                          <label htmlFor="subject" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
+                            Subject
+                          </label>
+                          <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            required
+                          />
+                          {errors.subject && (
+                            <motion.p 
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              className="mt-1 text-sm text-red-500"
+                            >
+                              {errors.subject}
+                            </motion.p>
+                          )}
+                        </AnimatedFormField>
+                        <AnimatedFormField custom={4}>
+                          <label htmlFor="message" className={`${outfit.className} block text-sm font-medium text-gray-700 mb-2`}>
+                            Message
+                          </label>
+                          <textarea
+                            id="message"
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            rows={4}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            required
+                          />
+                          {errors.message && (
+                            <motion.p 
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              className="mt-1 text-sm text-red-500"
+                            >
+                              {errors.message}
+                            </motion.p>
+                          )}
+                        </AnimatedFormField>
+                      </>
                     )}
-                  </button>
-                </form>
-              </div>
+                    {submitStatus.type !== 'idle' && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className={`p-4 rounded-lg transition-all duration-500 transform ${
+                          submitStatus.type === 'success' 
+                            ? 'bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30' 
+                            : 'bg-gradient-to-r from-red-500/20 to-rose-500/20 border border-red-500/30'
+                        } animate-fade-in-up backdrop-blur-sm`}
+                      >
+                        <div className="flex items-center gap-3">
+                          {submitStatus.type === 'success' ? (
+                            <div className="flex-shrink-0">
+                              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-green-500/20">
+                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex-shrink-0">
+                              <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-500 rounded-full flex items-center justify-center animate-shake shadow-lg shadow-red-500/20">
+                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                              </div>
+                            </div>
+                          )}
+                          <p className="text-sm font-medium text-white drop-shadow-sm">{submitStatus.message}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                    <AnimatedSubmitButton
+                      className={`w-full bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group`}
+                    >
+                      <span className={`relative z-10 ${isSubmitting ? 'opacity-0' : 'opacity-100'} transition-opacity`}>
+                        {isSubmitting ? 'Sending...' : formData.type === 'beta' ? 'Join Beta Program' : 'Send Message'}
+                      </span>
+                      {isSubmitting && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                      )}
+                    </AnimatedSubmitButton>
+                  </AnimatedForm>
+                </ScrollAnimation>
 
-              {/* Contact Information */}
-              <div className="space-y-8">
-                <div className="bg-white rounded-2xl p-8 shadow-lg">
-                  <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
-                    Contact Information
-                  </h2>
-                  <div className="space-y-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <FontAwesomeIcon icon={faEnvelope} className="w-6 h-6 text-purple-600" />
-                      </div>
-                      <div>
-                        <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
-                          Email
-                        </h3>
-                        <p className={`${outfit.className} text-gray-600`}>
-                        tareeqiapp@gmail.com
-                        </p>
-                      </div>
+                {/* Contact Information */}
+                <div className="space-y-8">
+                  <ScrollAnimation direction="left" className="bg-white rounded-2xl p-8 shadow-lg">
+                    <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
+                      Contact Information
+                    </h2>
+                    <div className="space-y-6">
+                      <motion.div 
+                        className="flex items-start space-x-4"
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <motion.div 
+                          className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                        >
+                          <FontAwesomeIcon icon={faEnvelope} className="w-6 h-6 text-purple-600" />
+                        </motion.div>
+                        <div>
+                          <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
+                            Email
+                          </h3>
+                          <p className={`${outfit.className} text-gray-600`}>
+                          tareeqiapp@gmail.com
+                          </p>
+                        </div>
+                      </motion.div>
+                      <motion.div 
+                        className="flex items-start space-x-4"
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <motion.div 
+                          className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                        >
+                          <FontAwesomeIcon icon={faPhone} className="w-6 h-6 text-purple-600" />
+                        </motion.div>
+                        <div>
+                          <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
+                            Phone
+                          </h3>
+                          <p className={`${outfit.className} text-gray-600`}>
+                            +966 552626165
+                          </p>
+                        </div>
+                      </motion.div>
+                      <motion.div 
+                        className="flex items-start space-x-4"
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <motion.div 
+                          className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                        >
+                          <FontAwesomeIcon icon={faMapMarkerAlt} className="w-6 h-6 text-purple-600" />
+                        </motion.div>
+                        <div>
+                          <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
+                            Location
+                          </h3>
+                          <p className={`${outfit.className} text-gray-600`}>
+                            Jouf University<br />
+                            College of Computer and Information Sciences<br />
+                            Sakaka, Saudi Arabia
+                          </p>
+                        </div>
+                      </motion.div>
                     </div>
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <FontAwesomeIcon icon={faPhone} className="w-6 h-6 text-purple-600" />
-                      </div>
-                      <div>
-                        <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
-                          Phone
-                        </h3>
-                        <p className={`${outfit.className} text-gray-600`}>
-                          +966 552626165
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <FontAwesomeIcon icon={faMapMarkerAlt} className="w-6 h-6 text-purple-600" />
-                      </div>
-                      <div>
-                        <h3 className={`${spaceGrotesk.className} text-lg font-semibold text-gray-900`}>
-                          Location
-                        </h3>
-                        <p className={`${outfit.className} text-gray-600`}>
-                          Jouf University<br />
-                          College of Computer and Information Sciences<br />
-                          Sakaka, Saudi Arabia
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  </ScrollAnimation>
 
-                {/* Map Section */}
-                <div className="bg-white rounded-2xl p-8 shadow-lg">
-                  <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
-                    Find Us
-                  </h2>
-                  <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.1234567890123!2d40.1816113471303!3d29.960050790146333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDU3JzM2LjIiTiA0MMKwMTAnNTMuOCJF!5e0!3m2!1sen!2ssa!4v1234567890123!5m2!1sen!2ssa"
-                      width="100%"
-                      height="300"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    />
-                  </div>
+                  {/* Map Section */}
+                  <ScrollAnimation direction="up" delay={0.3} className="bg-white rounded-2xl p-8 shadow-lg">
+                    <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-6 text-gray-900`}>
+                      Find Us
+                    </h2>
+                    <motion.div 
+                      className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 150 }}
+                    >
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.1234567890123!2d40.1816113471303!3d29.960050790146333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDU3JzM2LjIiTiA0MMKwMTAnNTMuOCJF!5e0!3m2!1sen!2ssa!4v1234567890123!5m2!1sen!2ssa"
+                        width="100%"
+                        height="300"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      />
+                    </motion.div>
+                  </ScrollAnimation>
                 </div>
               </div>
-            </div>
+            </ScrollAnimation>
           </div>
         </section>
       </main>
       <Footer />
-    </>
+    </PageTransition>
   );
 } 
