@@ -85,7 +85,8 @@ export default function Contact() {
     setSubmitStatus({ type: 'idle', message: '' });
 
     try {
-      const response = await fetch('/api/register', {
+      // Use Formspree for static sites
+      const response = await fetch('https://formspree.io/f/xanobboj', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,10 +96,8 @@ export default function Contact() {
           type: formData.type
         }),
       });
-
-      const data = await response.json();
       
-      if (data.success) {
+      if (response.ok) {
         setSubmitStatus({
           type: 'success',
           message: formData.type === 'beta' 
@@ -115,7 +114,7 @@ export default function Contact() {
         });
         setErrors({});
       } else {
-        throw new Error(data.error || 'Failed to send message');
+        throw new Error('Failed to send message');
       }
     } catch (error) {
       console.error('Error sending message:', error);

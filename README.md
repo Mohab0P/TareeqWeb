@@ -1,4 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tareeqi Web
+
+A modern Next.js website for the Tareeqi road monitoring app.
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Form Handling on GitHub Pages
+
+Since GitHub Pages is a static hosting service, it doesn't support server-side APIs or backend processing. To handle form submissions, this project uses [Formspree](https://formspree.io), a form backend service that sends submissions to your email without requiring a backend.
+
+### Current Formspree Configuration:
+
+This project uses two separate Formspree endpoints:
+- **Beta Registration Form** (homepage): `https://formspree.io/f/xdkgddgg`
+- **Contact Form**: `https://formspree.io/f/xanobboj`
+
+Using separate forms helps keep submissions organized by form type.
+
+### If you need to change the Formspree endpoints:
+
+1. Create a free account at [Formspree](https://formspree.io)
+2. Create new forms and get your form IDs
+3. Update the endpoints in these files:
+   - `src/app/page.tsx` (Beta registration form)
+   - `src/app/contact/page.tsx` (Contact form)
+
+Example:
+```javascript
+// Update this line in the appropriate file:
+const response = await fetch('https://formspree.io/f/YOUR_NEW_FORMSPREE_ID', {
+```
+
+## Deployment
+
+This project is configured for GitHub Pages deployment using GitHub Actions. When you push to the main branch, it will automatically build and deploy to GitHub Pages.
+
+### Important Notes:
+
+- All images use relative paths to work correctly on GitHub Pages
+- Static assets are properly copied during the build process
+- The `.nojekyll` file is included to prevent GitHub from processing the site with Jekyll
+- API routes do not work on GitHub Pages (hence the use of Formspree)
 
 ## Getting Started
 

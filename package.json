@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "bunx biome lint --write && bunx tsc --noEmit",
     "format": "bunx biome format --write",
-    "deploy": "next build && touch out/.nojekyll"
+    "deploy": "next build && touch out/.nojekyll && echo 'Note: Forms require Formspree setup as described in README.md'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",

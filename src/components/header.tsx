@@ -88,7 +88,7 @@ export default function Header() {
   // Staggered menu items (for mobile)
   const mobileMenuItemVariants = {
     closed: { x: -20, opacity: 0 },
-    open: (i) => ({ 
+    open: (i: number) => ({ 
       x: 0, 
       opacity: 1,
       transition: { 

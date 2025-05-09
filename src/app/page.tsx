@@ -77,7 +77,8 @@ export default function Home() {
     setSubmitStatus({ type: 'idle', message: '' });
     
     try {
-      const response = await fetch('/api/register', {
+      // Use Formspree for static sites
+      const response = await fetch('https://formspree.io/f/xdkgddgg', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,9 +89,7 @@ export default function Home() {
         }),
       });
 
-      const data = await response.json();
-      
-      if (data.success) {
+      if (response.ok) {
         setSubmitStatus({
           type: 'success',
           message: 'Registration successful! 🎉 Please check your email (including spam folder) for confirmation. We will contact you soon with next steps.'
@@ -98,7 +97,7 @@ export default function Home() {
         setFormData({ name: '', email: '', phone: '' });
         setErrors({});
       } else {
-        throw new Error(data.error || 'Failed to submit form');
+        throw new Error('Failed to submit form');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
