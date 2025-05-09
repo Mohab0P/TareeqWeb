@@ -176,7 +176,7 @@ export default function Home() {
           </div>
           
           {/* App Screenshots - Optimized for screenshot */}
-          <div className="flex flex-col md:flex-row justify-center items-center py-12 relative">
+          <div className="flex flex-col md:flex-row justify-center items-center py-12 relative overflow-visible">
             {/* Enhanced glow behind phones */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-500 opacity-20 blur-[100px] rounded-full"></div>
             <div className="absolute left-1/3 top-1/3 w-[300px] h-[300px] bg-indigo-400 opacity-15 blur-[80px] rounded-full"></div>
@@ -205,117 +205,161 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Text between phones - perfect for screenshot */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-30 px-6 py-4 bg-purple-900/80 backdrop-blur-md rounded-2xl border-2 border-purple-300/30 shadow-2xl max-w-md w-full">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-500 text-white px-4 py-1 rounded-full text-xs font-bold tracking-wider font-sans">
+            {/* Text between phones - updated widget design */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-30 px-4 py-3 bg-purple-900/80 backdrop-blur-md rounded-xl border border-purple-300/30 shadow-xl max-w-[280px] w-full">
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-indigo-500 text-white px-3 py-0.5 rounded-full text-xs font-bold tracking-wider font-sans">
                 INTRODUCING
               </div>
               
-              <h2 className={`${spaceGrotesk.className} text-3xl md:text-4xl font-bold mb-3 text-white drop-shadow-lg tracking-tight`}>
+              <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-2 text-white drop-shadow-lg tracking-tight`}>
                 ROAD QUALITY MONITORING
               </h2>
               
-              <p className={`${outfit.className} text-white/90 text-lg mb-4 max-w-md mx-auto font-light leading-relaxed`}>
+              <p className={`${outfit.className} text-white/90 text-sm mb-3 max-w-md mx-auto font-light leading-relaxed`}>
                 Transform your daily commute into valuable road data
               </p>
               
-              <div className="flex flex-wrap justify-center gap-4 mb-2">
-                <div className="bg-purple-800/80 border border-purple-400/30 px-3 py-1.5 rounded-lg flex items-center">
-                  <div className="w-3 h-3 bg-green-400 rounded-full mr-2 shadow-glow-green"></div>
-                  <span className={`${outfit.className} text-sm font-medium text-white`}>Real-time detection</span>
+              <div className="flex flex-wrap justify-center gap-2 mb-1">
+                <div className="bg-purple-800/80 border border-purple-400/30 px-2 py-1 rounded-lg flex items-center">
+                  <div className="w-2 h-2 bg-green-400 rounded-full mr-1.5 shadow-glow-green"></div>
+                  <span className={`${outfit.className} text-xs font-medium text-white`}>Real-time detection</span>
                 </div>
-                <div className="bg-purple-800/80 border border-purple-400/30 px-3 py-1.5 rounded-lg flex items-center">
-                  <div className="w-3 h-3 bg-blue-400 rounded-full mr-2 shadow-glow-blue"></div>
-                  <span className={`${outfit.className} text-sm font-medium text-white`}>GPS mapping</span>
+                <div className="bg-purple-800/80 border border-purple-400/30 px-2 py-1 rounded-lg flex items-center">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-1.5 shadow-glow-blue"></div>
+                  <span className={`${outfit.className} text-xs font-medium text-white`}>GPS mapping</span>
                 </div>
-                <div className="bg-purple-800/80 border border-purple-400/30 px-3 py-1.5 rounded-lg flex items-center">
-                  <div className="w-3 h-3 bg-purple-400 rounded-full mr-2 shadow-glow-purple"></div>
-                  <span className={`${outfit.className} text-sm font-medium text-white`}>Analytics</span>
+                <div className="bg-purple-800/80 border border-purple-400/30 px-2 py-1 rounded-lg flex items-center">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full mr-1.5 shadow-glow-purple"></div>
+                  <span className={`${outfit.className} text-xs font-medium text-white`}>Analytics</span>
                 </div>
               </div>
             </div>
-            
+
             {/* Left phone mockup with proper text descriptions */}
-            <div className="w-[300px] h-[600px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-hidden transform rotate-[-8deg] md:translate-x-14 z-10 mb-8 md:mb-0">
-              {/* Phone frame elements remain the same */}
+            <div className="w-[380px] h-[760px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[-8deg] md:translate-x-14 z-10 mb-8 md:mb-0">
+              {/* Phone frame elements */}
               <div className="absolute w-40 h-6 bg-black top-0 left-1/2 transform -translate-x-1/2 rounded-b-2xl z-20"></div>
-              <div className="absolute w-[280px] h-[580px] inset-0 m-auto overflow-hidden rounded-3xl">
+              <div className="absolute w-[360px] h-[740px] inset-0 m-auto overflow-hidden rounded-3xl">
                 <Image src="/phone1.png" alt="Tareeqi App Dashboard" fill className="object-cover" priority />
               </div>
               
               {/* Feature descriptions - with actual descriptive text */}
-              <div className="absolute top-[120px] -left-[220px] flex items-center">
-                <div className="bg-purple-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-1`}>Road Issues Counter</span>
-                  <span className={`${outfit.className} text-xs text-purple-200 font-normal`}>
+              <div className="absolute top-[120px] -left-[280px] hidden md:flex items-center z-30">
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Road Issues Counter</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
                     App tracks 3 detected road issues in your current area
                   </span>
                 </div>
-                <div className="w-16 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
-                <div className="w-4 h-4 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
+                <div className="w-24 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
+                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
               </div>
               
-              <div className="absolute top-[220px] -left-[190px] flex items-center">
-                <div className="bg-purple-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-1`}>Distance Traveled</span>
-                  <span className={`${outfit.className} text-xs text-purple-200 font-normal`}>
+              <div className="absolute top-[220px] -left-[260px] hidden md:flex items-center z-30">
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Distance Traveled</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
                     25km of roads scanned for quality issues today
                   </span>
                 </div>
-                <div className="w-14 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
-                <div className="w-4 h-4 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
+                <div className="w-20 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
+                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
               </div>
               
-              <div className="absolute top-[350px] -left-[200px] flex items-center">
-                <div className="bg-purple-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-1`}>User Profile</span>
-                  <span className={`${outfit.className} text-xs text-purple-200 font-normal`}>
+              <div className="absolute top-[350px] -left-[270px] hidden md:flex items-center z-30">
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>User Profile</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
                     "Road Expert" level achieved with 100 points earned
                   </span>
                 </div>
-                <div className="w-12 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
-                <div className="w-4 h-4 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
+                <div className="w-20 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
+                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
+              </div>
+
+              {/* Mobile feature boxes */}
+              <div className="md:hidden absolute inset-0 flex flex-col justify-center items-center gap-4 p-6">
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Road Issues Counter</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                    App tracks 3 detected road issues in your current area
+                  </span>
+                </div>
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Distance Traveled</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                    25km of roads scanned for quality issues today
+                  </span>
+                </div>
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>User Profile</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                    "Road Expert" level achieved with 100 points earned
+                  </span>
+                </div>
               </div>
             </div>
 
             {/* Right phone mockup with proper text descriptions */}
-            <div className="w-[300px] h-[600px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-hidden transform rotate-[8deg] md:-translate-x-14 z-20">
-              {/* Phone frame elements remain the same */}
+            <div className="w-[380px] h-[760px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[8deg] md:-translate-x-14 z-20">
+              {/* Phone frame elements */}
               <div className="absolute w-40 h-6 bg-black top-0 left-1/2 transform -translate-x-1/2 rounded-b-2xl z-20"></div>
-              <div className="absolute w-[280px] h-[580px] inset-0 m-auto overflow-hidden rounded-3xl">
+              <div className="absolute w-[360px] h-[740px] inset-0 m-auto overflow-hidden rounded-3xl">
                 <Image src="/phone3.png" alt="Tareeqi App Road Analysis" fill className="object-cover" priority />
               </div>
               
               {/* Feature descriptions - with actual descriptive text */}
-              <div className="absolute top-[180px] -right-[200px] flex items-center">
-                <div className="w-4 h-4 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-                <div className="w-12 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
-                <div className="bg-purple-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-1`}>Weekly Stats</span>
-                  <span className={`${outfit.className} text-xs text-purple-200 font-normal`}>
+              <div className="absolute top-[180px] -right-[280px] hidden md:flex items-center z-30">
+                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
+                <div className="w-24 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Weekly Stats</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
                     Visual breakdown of your 7-day road monitoring activity
                   </span>
                 </div>
               </div>
               
-              <div className="absolute top-[350px] -right-[210px] flex items-center">
-                <div className="w-4 h-4 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-                <div className="w-12 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
-                <div className="bg-purple-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-1`}>Performance Data</span>
-                  <span className={`${outfit.className} text-xs text-purple-200 font-normal`}>
+              <div className="absolute top-[350px] -right-[270px] hidden md:flex items-center z-30">
+                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
+                <div className="w-20 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Performance Data</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
                     14.3 km average trip length, +12% improvement this week
                   </span>
                 </div>
               </div>
               
-              <div className="absolute top-[520px] -right-[190px] flex items-center">
-                <div className="w-4 h-4 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-                <div className="w-10 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
-                <div className="bg-purple-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-1`}>Navigation Tabs</span>
-                  <span className={`${outfit.className} text-xs text-purple-200 font-normal`}>
+              <div className="absolute top-[520px] -right-[260px] hidden md:flex items-center z-30">
+                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
+                <div className="w-20 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Navigation Tabs</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
                     Quick access to Dashboard, Map, History & Settings
+                  </span>
+                </div>
+              </div>
+
+              {/* Mobile feature boxes - inside phone */}
+              <div className="md:hidden absolute inset-0 flex flex-col justify-center items-center gap-4 p-6">
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Road Issues Counter</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                    App tracks 3 detected road issues in your current area
+                  </span>
+                </div>
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Distance Traveled</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                    25km of roads scanned for quality issues today
+                  </span>
+                </div>
+                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
+                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>User Profile</span>
+                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                    "Road Expert" level achieved with 100 points earned
                   </span>
                 </div>
               </div>
