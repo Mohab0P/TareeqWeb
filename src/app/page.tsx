@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faUser, faClock, faSearch, faFilter, faTags, faChevronDown, faBook, faLaptopCode, faChartLine, faPalette, faMobile, faBullhorn, faRoad, faMapMarkedAlt, faShieldAlt, faBell } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardMedia, CardBadge } from '@/components/ui/card';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 // Custom font setup
 const spaceGrotesk = Space_Grotesk({
@@ -25,6 +26,10 @@ const outfit = Outfit({
 });
 
 export default function Home() {
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -124,13 +129,47 @@ export default function Home() {
     <>
       <Header />
       {/* Hero Section - Poster Style */}
-      <section className={`relative bg-gradient-to-br from-purple-700 via-indigo-600 to-purple-500 text-white py-20 md:py-8 overflow-hidden ${spaceGrotesk.variable} ${outfit.variable} font-sans mt-20`}>
-        {/* Abstract shapes */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-20">
-          <div className="absolute top-[20%] left-[10%] w-56 h-56 bg-pink-400 rounded-full blur-[80px]"></div>
-          <div className="absolute bottom-[30%] right-[5%] w-72 h-72 bg-blue-400 rounded-full blur-[100px]"></div>
-          <div className="absolute top-[60%] left-[50%] w-60 h-60 bg-indigo-300 rounded-full blur-[90px]"></div>
-        </div>
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className={`relative bg-gradient-to-br from-purple-700 via-indigo-600 to-purple-500 text-white py-20 md:py-8 overflow-hidden ${spaceGrotesk.variable} ${outfit.variable} font-sans mt-20`}
+      >
+        {/* Abstract shapes with animations */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.2 }}
+          transition={{ duration: 1 }}
+          className="absolute top-0 left-0 w-full h-full"
+        >
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              x: [0, 20, 0],
+              y: [0, -20, 0]
+            }}
+            transition={{ duration: 8, repeat: Infinity }}
+            className="absolute top-[20%] left-[10%] w-56 h-56 bg-pink-400 rounded-full blur-[80px]"
+          ></motion.div>
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.3, 1],
+              x: [0, -30, 0],
+              y: [0, 30, 0]
+            }}
+            transition={{ duration: 10, repeat: Infinity }}
+            className="absolute bottom-[30%] right-[5%] w-72 h-72 bg-blue-400 rounded-full blur-[100px]"
+          ></motion.div>
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.1, 1],
+              x: [0, 15, 0],
+              y: [0, 15, 0]
+            }}
+            transition={{ duration: 7, repeat: Infinity }}
+            className="absolute top-[60%] left-[50%] w-60 h-60 bg-indigo-300 rounded-full blur-[90px]"
+          ></motion.div>
+        </motion.div>
         
         {/* Subtle pattern overlay */}
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-soft-light"></div>
@@ -158,9 +197,14 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          {/* Logo section - centered */}
-          <div className="flex justify-center items-center mb-16">
-            <div className="flex items-center bg-white/10 px-6 py-3 rounded-full backdrop-blur-sm">
+          {/* Logo section with widgets */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-center mb-16"
+          >
+            <div className="flex items-center bg-white/10 px-6 py-3 rounded-full backdrop-blur-sm mb-8">
               {/* App logo */}
               <div className="w-12 h-12 bg-white rounded-full p-2 mr-3 flex items-center justify-center shadow-lg">
                 <Image 
@@ -171,9 +215,66 @@ export default function Home() {
                   className="drop-shadow-md"
                 />
               </div>
-              <span className="text-2xl font-bold tracking-wide text-white/90">tareeqi</span>
+              <span className="text-2xl font-bold tracking-wide text-white/90">Tareeqi</span>
             </div>
-          </div>
+
+            {/* Widgets under logo */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex flex-col items-center gap-4 w-full max-w-[90%] md:max-w-[600px]"
+            >
+              {/* AI-Powered Technology Badge */}
+              <motion.div 
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="bg-gradient-to-r from-purple-300 to-indigo-300 text-purple-900 px-5 py-1.5 rounded-full shadow-lg border border-white/30 backdrop-blur-md flex items-center gap-2 transform -rotate-1 hover:rotate-0 transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm font-extrabold tracking-wide">AI-POWERED TECHNOLOGY</span>
+              </motion.div>
+
+              {/* Future of Road Monitoring Tagline */}
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                className="text-white px-4 py-1.5 bg-purple-800/80 rounded-lg backdrop-blur-sm border border-purple-300/30 shadow-lg"
+              >
+                <span className={`${spaceGrotesk.className} text-sm font-bold tracking-wider uppercase`}>
+                  THE FUTURE OF ROAD MONITORING
+                </span>
+              </motion.div>
+
+              {/* Decorative dots */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="flex gap-1.5"
+              >
+                <motion.div 
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+                  className="w-1.5 h-1.5 bg-purple-300 rounded-full"
+                ></motion.div>
+                <motion.div 
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                  className="w-1.5 h-1.5 bg-indigo-300 rounded-full"
+                ></motion.div>
+                <motion.div 
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                  className="w-1.5 h-1.5 bg-purple-300 rounded-full"
+                ></motion.div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
           
           {/* App Screenshots - Optimized for screenshot */}
           <div className="flex flex-col md:flex-row justify-center items-center py-12 relative overflow-visible">
@@ -181,208 +282,253 @@ export default function Home() {
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-500 opacity-20 blur-[100px] rounded-full"></div>
             <div className="absolute left-1/3 top-1/3 w-[300px] h-[300px] bg-indigo-400 opacity-15 blur-[80px] rounded-full"></div>
             
-            {/* Enhanced badge above phones */}
-            <div className="absolute left-1/2 top-[-10px] -translate-x-1/2 text-center z-30 flex flex-col items-center">
-              <div className="bg-gradient-to-r from-purple-300 to-indigo-300 text-purple-900 px-5 py-1.5 rounded-full shadow-lg border border-white/30 backdrop-blur-md flex items-center gap-2 transform -rotate-1 hover:rotate-0 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm font-extrabold tracking-wide">AI-POWERED TECHNOLOGY</span>
-              </div>
-              
-              {/* Decorative dots */}
-              <div className="flex gap-1.5 mt-2">
-                <div className="w-1.5 h-1.5 bg-purple-300 rounded-full animate-pulse"></div>
-                <div className="w-1.5 h-1.5 bg-indigo-300 rounded-full animate-pulse delay-100"></div>
-                <div className="w-1.5 h-1.5 bg-purple-300 rounded-full animate-pulse delay-200"></div>
-              </div>
-              
-              {/* Optional extra tagline */}
-              <div className="mt-3 text-white px-4 py-1.5 bg-purple-800/80 rounded-lg backdrop-blur-sm border border-purple-300/30 shadow-lg">
-                <span className={`${spaceGrotesk.className} text-sm font-bold tracking-wider uppercase`}>
-                  THE FUTURE OF ROAD MONITORING
-                </span>
-              </div>
-            </div>
-            
-            {/* Text between phones - updated widget design */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-30 px-4 py-3 bg-purple-900/80 backdrop-blur-md rounded-xl border border-purple-300/30 shadow-xl max-w-[280px] w-full">
-              <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-indigo-500 text-white px-3 py-0.5 rounded-full text-xs font-bold tracking-wider font-sans">
-                INTRODUCING
-              </div>
-              
-              <h2 className={`${spaceGrotesk.className} text-2xl font-bold mb-2 text-white drop-shadow-lg tracking-tight`}>
-                ROAD QUALITY MONITORING
-              </h2>
-              
-              <p className={`${outfit.className} text-white/90 text-sm mb-3 max-w-md mx-auto font-light leading-relaxed`}>
-                Transform your daily commute into valuable road data
-              </p>
-              
-              <div className="flex flex-wrap justify-center gap-2 mb-1">
-                <div className="bg-purple-800/80 border border-purple-400/30 px-2 py-1 rounded-lg flex items-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mr-1.5 shadow-glow-green"></div>
-                  <span className={`${outfit.className} text-xs font-medium text-white`}>Real-time detection</span>
-                </div>
-                <div className="bg-purple-800/80 border border-purple-400/30 px-2 py-1 rounded-lg flex items-center">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-1.5 shadow-glow-blue"></div>
-                  <span className={`${outfit.className} text-xs font-medium text-white`}>GPS mapping</span>
-                </div>
-                <div className="bg-purple-800/80 border border-purple-400/30 px-2 py-1 rounded-lg flex items-center">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full mr-1.5 shadow-glow-purple"></div>
-                  <span className={`${outfit.className} text-xs font-medium text-white`}>Analytics</span>
-                </div>
-              </div>
-            </div>
+            {/* Phones Container with Enhanced Animations */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-0 relative"
+            >
+              {/* Left phone mockup */}
+              <motion.div 
+                initial={{ opacity: 0, x: -100, rotate: -15 }}
+                animate={{ opacity: 1, x: 0, rotate: -8 }}
+                transition={{ duration: 1, delay: 0.7, type: "spring", stiffness: 100 }}
+                className="w-[280px] md:w-[380px] h-[560px] md:h-[760px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[-8deg] md:translate-x-14 z-10 mb-8 md:mb-0"
+              >
+                {/* Phone frame elements */}
+                <div className="absolute w-40 h-6 bg-black top-0 left-1/2 transform -translate-x-1/2 rounded-b-2xl z-20"></div>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                  className="absolute w-[260px] md:w-[360px] h-[540px] md:h-[740px] inset-0 m-auto overflow-hidden rounded-3xl"
+                >
+                  <Image src="/phone1.png" alt="Tareeqi App Dashboard" fill className="object-cover" priority />
+                </motion.div>
 
-            {/* Left phone mockup with proper text descriptions */}
-            <div className="w-[380px] h-[760px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[-8deg] md:translate-x-14 z-10 mb-8 md:mb-0">
-              {/* Phone frame elements */}
-              <div className="absolute w-40 h-6 bg-black top-0 left-1/2 transform -translate-x-1/2 rounded-b-2xl z-20"></div>
-              <div className="absolute w-[360px] h-[740px] inset-0 m-auto overflow-hidden rounded-3xl">
-                <Image src="/phone1.png" alt="Tareeqi App Dashboard" fill className="object-cover" priority />
-              </div>
-              
-              {/* Feature descriptions - with actual descriptive text */}
-              <div className="absolute top-[120px] -left-[280px] hidden md:flex items-center z-30">
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Road Issues Counter</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    App tracks 3 detected road issues in your current area
-                  </span>
-                </div>
-                <div className="w-24 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
-                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-              </div>
-              
-              <div className="absolute top-[220px] -left-[260px] hidden md:flex items-center z-30">
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Distance Traveled</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    25km of roads scanned for quality issues today
-                  </span>
-                </div>
-                <div className="w-20 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
-                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-              </div>
-              
-              <div className="absolute top-[350px] -left-[270px] hidden md:flex items-center z-30">
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>User Profile</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    "Road Expert" level achieved with 100 points earned
-                  </span>
-                </div>
-                <div className="w-20 h-[2px] bg-gradient-to-r from-purple-900 to-white"></div>
-                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-              </div>
+                {/* Desktop feature boxes */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="absolute top-[120px] -left-[280px] hidden md:flex items-center z-30"
+                >
+                  <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
+                    <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Road Issues Counter</span>
+                    <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                      App tracks 3 detected road issues in your current area
+                    </span>
+                  </div>
+                  <motion.div 
+                    animate={{ width: ["0%", "100%"] }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="w-24 h-[2px] bg-gradient-to-r from-purple-900 to-white"
+                  ></motion.div>
+                  <motion.div 
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"
+                  ></motion.div>
+                </motion.div>
 
-              {/* Mobile feature boxes */}
-              <div className="md:hidden absolute inset-0 flex flex-col justify-center items-center gap-4 p-6">
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Road Issues Counter</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    App tracks 3 detected road issues in your current area
-                  </span>
-                </div>
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Distance Traveled</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    25km of roads scanned for quality issues today
-                  </span>
-                </div>
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>User Profile</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    "Road Expert" level achieved with 100 points earned
-                  </span>
-                </div>
-              </div>
-            </div>
+                {/* Mobile feature boxes */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                  className="md:hidden absolute inset-0 flex flex-col justify-center items-center gap-4 p-6"
+                >
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full"
+                  >
+                    <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Road Issues Counter</span>
+                    <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                      App tracks 3 detected road issues in your current area
+                    </span>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full"
+                  >
+                    <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Distance Traveled</span>
+                    <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                      25km of roads scanned for quality issues today
+                    </span>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full"
+                  >
+                    <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>User Profile</span>
+                    <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                      "Road Expert" level achieved with 100 points earned
+                    </span>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
 
-            {/* Right phone mockup with proper text descriptions */}
-            <div className="w-[380px] h-[760px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[8deg] md:-translate-x-14 z-20">
-              {/* Phone frame elements */}
-              <div className="absolute w-40 h-6 bg-black top-0 left-1/2 transform -translate-x-1/2 rounded-b-2xl z-20"></div>
-              <div className="absolute w-[360px] h-[740px] inset-0 m-auto overflow-hidden rounded-3xl">
-                <Image src="/phone3.png" alt="Tareeqi App Road Analysis" fill className="object-cover" priority />
-              </div>
-              
-              {/* Feature descriptions - with actual descriptive text */}
-              <div className="absolute top-[180px] -right-[280px] hidden md:flex items-center z-30">
-                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-                <div className="w-24 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Weekly Stats</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    Visual breakdown of your 7-day road monitoring activity
-                  </span>
-                </div>
-              </div>
-              
-              <div className="absolute top-[350px] -right-[270px] hidden md:flex items-center z-30">
-                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-                <div className="w-20 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Performance Data</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    14.3 km average trip length, +12% improvement this week
-                  </span>
-                </div>
-              </div>
-              
-              <div className="absolute top-[520px] -right-[260px] hidden md:flex items-center z-30">
-                <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"></div>
-                <div className="w-20 h-[2px] bg-gradient-to-l from-purple-900 to-white"></div>
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Navigation Tabs</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    Quick access to Dashboard, Map, History & Settings
-                  </span>
-                </div>
-              </div>
+              {/* Right phone mockup */}
+              <motion.div 
+                initial={{ opacity: 0, x: 100, rotate: 15 }}
+                animate={{ opacity: 1, x: 0, rotate: 8 }}
+                transition={{ duration: 1, delay: 0.9, type: "spring", stiffness: 100 }}
+                className="w-[280px] md:w-[380px] h-[560px] md:h-[760px] bg-black rounded-[40px] border-[10px] border-gray-800 shadow-[0_0_40px_rgba(139,92,246,0.4),inset_0_0_3px_rgba(255,255,255,0.2)] relative overflow-visible transform rotate-[8deg] md:-translate-x-14 z-20"
+              >
+                {/* Phone frame elements */}
+                <div className="absolute w-40 h-6 bg-black top-0 left-1/2 transform -translate-x-1/2 rounded-b-2xl z-20"></div>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                  className="absolute w-[260px] md:w-[360px] h-[540px] md:h-[740px] inset-0 m-auto overflow-hidden rounded-3xl"
+                >
+                  <Image src="/phone3.png" alt="Tareeqi App Road Analysis" fill className="object-cover" priority />
+                </motion.div>
 
-              {/* Mobile feature boxes - inside phone */}
-              <div className="md:hidden absolute inset-0 flex flex-col justify-center items-center gap-4 p-6">
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Road Issues Counter</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    App tracks 3 detected road issues in your current area
-                  </span>
-                </div>
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Distance Traveled</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    25km of roads scanned for quality issues today
-                  </span>
-                </div>
-                <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full">
-                  <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>User Profile</span>
-                  <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
-                    "Road Expert" level achieved with 100 points earned
-                  </span>
-                </div>
-              </div>
-            </div>
+                {/* Desktop feature boxes */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="absolute top-[120px] -right-[280px] hidden md:flex items-center z-30"
+                >
+                  <div className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm min-w-[140px]">
+                    <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Weekly Stats</span>
+                    <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                      Visual breakdown of your 7-day road monitoring activity
+                    </span>
+                  </div>
+                  <motion.div 
+                    animate={{ width: ["0%", "100%"] }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="w-24 h-[2px] bg-gradient-to-r from-purple-900 to-white"
+                  ></motion.div>
+                  <motion.div 
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)] border border-white"
+                  ></motion.div>
+                </motion.div>
+
+                {/* Mobile feature boxes */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                  className="md:hidden absolute inset-0 flex flex-col justify-center items-center gap-4 p-6"
+                >
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full"
+                  >
+                    <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Weekly Stats</span>
+                    <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                      Visual breakdown of your 7-day road monitoring activity
+                    </span>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full"
+                  >
+                    <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Performance Data</span>
+                    <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                      14.3 km average trip length, +12% improvement this week
+                    </span>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="bg-gradient-to-r from-purple-900/95 to-indigo-900/95 text-white px-3 py-2 rounded-lg text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-purple-400/40 backdrop-blur-sm w-full"
+                  >
+                    <span className={`${spaceGrotesk.className} font-bold block mb-0.5 text-purple-200`}>Navigation Tabs</span>
+                    <span className={`${outfit.className} text-[10px] text-white/90 font-normal`}>
+                      Quick access to Dashboard, Map, History & Settings
+                    </span>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
           
-          {/* App Name and Download - enhanced */}
-          <div className="text-center max-w-4xl mx-auto mt-12">
-            <div className="mb-2 inline-block">
-              <span className={`${outfit.className} text-xs font-bold tracking-[0.2em] bg-white/20 text-white/90 py-1 px-3 rounded-full`}>REVOLUTIONARY</span>
-            </div>
-            <h1 className={`${spaceGrotesk.className} text-5xl md:text-7xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-indigo-100 letter-spacing-[-0.02em]`}>
+          {/* App Name and Download Section with Enhanced Animations */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="text-center max-w-4xl mx-auto mt-12 px-4"
+          >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+              className="mb-2 inline-block"
+            >
+              <motion.span 
+                animate={{ 
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{ duration: 5, repeat: Infinity }}
+                className={`${outfit.className} text-xs font-bold tracking-[0.2em] bg-gradient-to-r from-white/20 via-white/40 to-white/20 bg-[length:200%_100%] text-white/90 py-1 px-3 rounded-full`}
+              >
+                REVOLUTIONARY
+              </motion.span>
+            </motion.div>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.3 }}
+              className={`${spaceGrotesk.className} text-4xl md:text-7xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-indigo-100 letter-spacing-[-0.02em]`}
+            >
               TAREEQI
-            </h1>
-            <h2 className={`${spaceGrotesk.className} text-3xl md:text-4xl font-semibold mb-8 tracking-wide text-indigo-100`}>
+            </motion.h1>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.4 }}
+              className={`${spaceGrotesk.className} text-2xl md:text-4xl font-semibold mb-8 tracking-wide text-indigo-100`}
+            >
               ROAD MONITORING APP
-            </h2>
-            <p className={`${outfit.className} text-xl mb-12 max-w-2xl mx-auto text-white/80 font-light`}>
+            </motion.h2>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.5 }}
+              className={`${outfit.className} text-lg md:text-xl mb-12 max-w-2xl mx-auto text-white/80 font-light`}
+            >
               JOIN THE BETA PROGRAM
-            </p>
+            </motion.p>
             
             {/* Beta Registration Form */}
-            <div className="max-w-md mx-auto bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.3 }}
+              className="max-w-md mx-auto bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 mb-12"
+            >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white mb-2">Full Name</label>
@@ -488,9 +634,14 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </button>
               </form>
-            </div>
+            </motion.div>
             
-            <div className="flex flex-wrap justify-center gap-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.5 }}
+              className="flex flex-wrap justify-center gap-6"
+            >
               <a href="#" className={`${outfit.className} bg-purple-900/80 text-white px-8 py-4 rounded-xl inline-flex items-center gap-4 hover:bg-purple-900 transition-all shadow-[0_10px_25px_rgba(0,0,0,0.2)] group cursor-not-allowed`}>
                 <div className="bg-white/10 p-2 rounded-full">
                   <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
@@ -514,10 +665,15 @@ export default function Home() {
                   <div className="text-xl font-semibold">Google Play</div>
                 </div>
               </a>
-            </div>
+            </motion.div>
 
             {/* RGA Dashboard Link */}
-            <div className="mt-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.7 }}
+              className="mt-8"
+            >
               <a 
                 href="https://salik-app-project-d4e90.web.app/" 
                 target="_blank" 
@@ -527,18 +683,38 @@ export default function Home() {
                 <FontAwesomeIcon icon={faChartLine} className="w-5 h-5" />
                 <span>View RGA Dashboard</span>
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
         
         {/* Enhanced wave effect at bottom */}
-        <div className="absolute -bottom-1 left-0 right-0">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.5 }}
+          className="absolute -bottom-1 left-0 right-0"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path fill="#ffffff" fillOpacity="1" d="M0,64L48,80C96,96,192,128,288,138.7C384,149,480,139,576,128C672,117,768,107,864,122.7C960,139,1056,181,1152,186.7C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            <motion.path 
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 2, delay: 1.5 }}
+              fill="#ffffff" 
+              fillOpacity="1" 
+              d="M0,64L48,80C96,96,192,128,288,138.7C384,149,480,139,576,128C672,117,768,107,864,122.7C960,139,1056,181,1152,186.7C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></motion.path>
           </svg>
-        </div>
-      </section>
-      <Footer />
+        </motion.div>
+      </motion.section>
+
+      {/* Footer with Animation */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.7 }}
+      >
+        <Footer />
+      </motion.div>
     </>
   );
 }
