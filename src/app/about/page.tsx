@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb, faRoad, faChartLine, faUsers, faBullseye, faHandshake, faGlobe, faUniversity, faHistory, faStar, faAward, faQuoteLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -106,11 +106,32 @@ const milestones = [
 
 export default function About() {
   const [activeMember, setActiveMember] = useState<number | null>(null);
+  const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({});
   const timelineRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start end", "end start"]
   });
+
+  // Function to get initials from name
+  const getInitials = (name: string) => {
+    return name.split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase();
+  };
+
+  // Function to get avatar background color based on name
+  const getAvatarColor = (name: string) => {
+    const colors = [
+      "bg-purple-600", "bg-indigo-600", "bg-blue-600", 
+      "bg-pink-600", "bg-red-600", "bg-orange-600"
+    ];
+    
+    // Use name to determine a consistent color
+    const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return colors[hash % colors.length];
+  };
 
   // Animation variants
   const fadeInUp = {
@@ -536,13 +557,20 @@ export default function About() {
                   className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    width={96}
-                    height={96}
-                    className="object-cover w-full h-full"
-                  />
+                  {imageErrors[index] ? (
+                    <div className={`${getAvatarColor(member.name)} w-full h-full flex items-center justify-center text-white text-2xl font-bold`}>
+                      {getInitials(member.name)}
+                    </div>
+                  ) : (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={96}
+                      height={96}
+                      className="object-cover w-full h-full"
+                      onError={() => setImageErrors(prev => ({...prev, [index]: true}))}
+                    />
+                  )}
                 </motion.div>
                 
                 <h3 className={`${spaceGrotesk.className} text-xl font-bold mb-2`}>
