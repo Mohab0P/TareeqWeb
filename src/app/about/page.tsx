@@ -31,19 +31,19 @@ const teamMembers = [
   {
     name: "Moath Algahtani",
     role: "AI Developer",
-    image: "moath.png",
+    image: "../moath.png",
     bio: "Expert in machine learning models and AI implementation for road anomaly detection."
   },
   {
     name: "Zaid Alshahrari",
     role: "System Analyst",
-    image: "zaid.png",
+    image: "./zaid.png",
     bio: "Analyzes complex systems requirements and designs efficient software architectures."
   },
   {
     name: "Sulaimman Alshamri",
     role: "Full Stack Developer",
-    image: "sulaiman.png",
+    image: "/sulaiman.png",
     bio: "Creates seamless experiences across both front-end and back-end technologies."
   },
   {
