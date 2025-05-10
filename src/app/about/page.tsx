@@ -31,25 +31,25 @@ const teamMembers = [
   {
     name: "Moath Algahtani",
     role: "AI Developer",
-    image: "https://i.imgur.com/XOxaGQS.png",
+    image: "https://imgur.com/a/k4NxRsW",
     bio: "Expert in machine learning models and AI implementation for road anomaly detection."
   },
   {
     name: "Zaid Alshahrari",
     role: "System Analyst",
-    image: "https://i.imgur.com/LHEuIzV.png",
+    image: "https://imgur.com/a/PHmE0dp",
     bio: "Analyzes complex systems requirements and designs efficient software architectures."
   },
   {
     name: "Sulaimman Alshamri",
     role: "Full Stack Developer",
-    image: "https://i.imgur.com/n4UmCnv.png",
+    image: "https://imgur.com/a/uWRziHO",
     bio: "Creates seamless experiences across both front-end and back-end technologies."
   },
   {
     name: "Mohab Alraddadi",
     role: "Mobile Developer/UI/UX Designer",
-    image: "https://i.imgur.com/bC5wfQS.png",
+    image: "https://imgur.com/a/bK6RD2E",
     bio: "Designs intuitive interfaces and develops elegant mobile solutions."
   }
 ];
