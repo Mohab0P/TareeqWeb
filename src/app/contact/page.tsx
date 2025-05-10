@@ -30,7 +30,7 @@ export default function Contact() {
     subject: '',
     message: '',
     phone: '',
-    type: 'contact' // 'contact' or 'beta'
+    type: 'contact' as 'contact' | 'beta'
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -60,10 +60,10 @@ export default function Contact() {
         newErrors.phone = 'Please enter a valid phone number';
       }
     } else {
-      if (!formData.subject.trim()) {
+      if (!formData.subject?.trim()) {
         newErrors.subject = 'Subject is required';
       }
-      if (!formData.message.trim()) {
+      if (!formData.message?.trim()) {
         newErrors.message = 'Message is required';
       } else if (formData.message.length < 10) {
         newErrors.message = 'Message must be at least 10 characters';
@@ -85,19 +85,23 @@ export default function Contact() {
     setSubmitStatus({ type: 'idle', message: '' });
 
     try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        type: formData.type,
+        ...(formData.type === 'contact' && {
+          subject: formData.subject,
+          message: formData.message
+        })
+      };
+
       const response = await fetch('https://email-api-9y3z.vercel.app/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          type: formData.type,
-          subject: formData.subject,
-          message: formData.message
-        })
+        body: JSON.stringify(payload)
       });
       
       const data = await response.json();
@@ -404,7 +408,7 @@ export default function Contact() {
                         </motion.p>
                       )}
                     </motion.div>
-                    
+
                     <motion.div 
                       className="relative"
                       initial={{ opacity: 0, y: 20 }}
@@ -443,45 +447,44 @@ export default function Contact() {
                     </motion.div>
                   </div>
 
-                  {formData.type === 'beta' ? (
-                    <motion.div 
-                      className="relative"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.3 }}
-                      key="phone-field"
+                  <motion.div 
+                    className="relative"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                  >
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={`peer w-full px-4 pt-6 pb-2 bg-gray-50 border-2 ${
+                        errors.phone ? 'border-red-400' : formData.phone ? 'border-green-400' : 'border-gray-200'
+                      } rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all`}
+                      placeholder=" "
+                      required
+                    />
+                    <label 
+                      htmlFor="phone" 
+                      className="absolute top-2 left-4 text-xs text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs"
                     >
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className={`peer w-full px-4 pt-6 pb-2 bg-gray-50 border-2 ${
-                          errors.phone ? 'border-red-400' : formData.phone ? 'border-green-400' : 'border-gray-200'
-                        } rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all`}
-                        placeholder=" "
-                        required
-                      />
-                      <label 
-                        htmlFor="phone" 
-                        className="absolute top-2 left-4 text-xs text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs"
+                      Phone Number
+                    </label>
+                    {errors.phone && (
+                      <motion.p 
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="mt-1 text-sm text-red-500 flex items-center"
                       >
-                        Phone Number
-                      </label>
-                      {errors.phone && (
-                        <motion.p 
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          className="mt-1 text-sm text-red-500 flex items-center"
-                        >
-                          <span className="w-1 h-1 bg-red-500 rounded-full mr-2"></span>
-                          {errors.phone}
-                        </motion.p>
-                      )}
-                    </motion.div>
-                  ) : (
+                        <span className="w-1 h-1 bg-red-500 rounded-full mr-2"></span>
+                        {errors.phone}
+                      </motion.p>
+                    )}
+                  </motion.div>
+
+                  {formData.type === 'contact' && (
                     <>
                       <motion.div 
                         className="relative"
@@ -489,7 +492,6 @@ export default function Contact() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: 0.3 }}
-                        key="subject-field"
                       >
                         <input
                           type="text"
@@ -527,7 +529,6 @@ export default function Contact() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: 0.4 }}
-                        key="message-field"
                       >
                         <textarea
                           id="message"
