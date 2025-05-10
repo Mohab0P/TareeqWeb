@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
-    "build": "next build && node scripts/copy-public.js && node scripts/create-nojekyll.js && node scripts/fix-image-paths.js",
+    "build": "node scripts/fix-image-case.js && next build && node scripts/copy-public.js && node scripts/create-nojekyll.js && node scripts/fix-image-paths.js",
     "start": "next start",
     "lint": "bunx biome lint --write && bunx tsc --noEmit",
     "format": "bunx biome format --write",
-    "deploy": "next build && node scripts/copy-public.js && node scripts/create-nojekyll.js && node scripts/fix-image-paths.js && echo 'Note: Forms require Formspree setup as described in README.md'"
+    "deploy": "node scripts/fix-image-case.js && next build && node scripts/copy-public.js && node scripts/create-nojekyll.js && node scripts/fix-image-paths.js && echo 'Note: Forms require Formspree setup as described in README.md'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
