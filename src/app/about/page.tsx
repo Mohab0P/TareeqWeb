@@ -25,19 +25,19 @@ const teamMembers = [
   {
     name: "Bahaa AlSulaiman",
     role: "Team Lead/Mobile Developer",
-    image: "bahaa.png",
+    image: "/bahaa.png",
     bio: "Leads the team with expertise in mobile app development and project management."
   },
   {
     name: "Moath Algahtani",
     role: "AI Developer",
-    image: "../moath.png",
+    image: "/moath.png",
     bio: "Expert in machine learning models and AI implementation for road anomaly detection."
   },
   {
     name: "Zaid Alshahrari",
     role: "System Analyst",
-    image: "./zaid.png",
+    image: "/zaid.png",
     bio: "Analyzes complex systems requirements and designs efficient software architectures."
   },
   {
@@ -49,7 +49,7 @@ const teamMembers = [
   {
     name: "Mohab Alraddadi",
     role: "Mobile Developer/UI/UX Designer",
-    image: "mohab.png",
+    image: "/mohab.png",
     bio: "Designs intuitive interfaces and develops elegant mobile solutions."
   }
 ];
@@ -536,7 +536,7 @@ export default function About() {
                   className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <Image
+                  <img
                     src={member.image}
                     alt={member.name}
                     width={96}
