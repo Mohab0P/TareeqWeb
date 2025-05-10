@@ -25,13 +25,13 @@ const teamMembers = [
   {
     name: "Bahaa AlSulaiman",
     role: "Team Lead/Mobile Developer",
-    image: "https://i.imgur.com/c9y8sYQ.png",
+    image: "https://i.imgur.com/KjZqLuT.jpeg",
     bio: "Leads the team with expertise in mobile app development and project management."
   },
   {
     name: "Moath Algahtani",
     role: "AI Developer",
-    image: "https://i.imgur.com/k4NxRsW.png",
+    image: "https://i.imgur.com/3wuKFz4.jpeg",
     bio: "Expert in machine learning models and AI implementation for road anomaly detection."
   },
   {
@@ -49,7 +49,7 @@ const teamMembers = [
   {
     name: "Mohab Alraddadi",
     role: "Mobile Developer/UI/UX Designer",
-    image: "https://i.imgur.com/bK6RD2E.png",
+    image: "https://i.imgur.com/xNkrPU1.jpeg",
     bio: "Designs intuitive interfaces and develops elegant mobile solutions."
   }
 ];
