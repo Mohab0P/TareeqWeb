@@ -77,8 +77,8 @@ export default function Home() {
     setSubmitStatus({ type: 'idle', message: '' });
     
     try {
-      // Use Formspree for static sites
-      const response = await fetch('https://formspree.io/f/xdkgddgg', {
+      // Use new email API endpoint
+      const response = await fetch('https://email-api-9y3z.vercel.app/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
