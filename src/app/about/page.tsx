@@ -25,7 +25,7 @@ const teamMembers = [
   {
     name: "Bahaa AlSulaiman",
     role: "Team Lead/Mobile Developer",
-    image: "https://i.imgur.com/4F8tlhM.png",
+    image: "https://imgur.com/a/c9y8sYQ",
     bio: "Leads the team with expertise in mobile app development and project management."
   },
   {
