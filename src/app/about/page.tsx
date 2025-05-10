@@ -25,31 +25,31 @@ const teamMembers = [
   {
     name: "Bahaa AlSulaiman",
     role: "Team Lead/Mobile Developer",
-    image: "https://imgur.com/a/c9y8sYQ",
+    image: "/bahaa.png",
     bio: "Leads the team with expertise in mobile app development and project management."
   },
   {
     name: "Moath Algahtani",
     role: "AI Developer",
-    image: "https://imgur.com/a/k4NxRsW",
+    image: "/moath.png",
     bio: "Expert in machine learning models and AI implementation for road anomaly detection."
   },
   {
     name: "Zaid Alshahrari",
     role: "System Analyst",
-    image: "https://imgur.com/a/PHmE0dp",
+    image: "/zaid.png",
     bio: "Analyzes complex systems requirements and designs efficient software architectures."
   },
   {
     name: "Sulaimman Alshamri",
     role: "Full Stack Developer",
-    image: "https://imgur.com/a/uWRziHO",
+    image: "https://i.imgur.com/hv5B7SA.png",
     bio: "Creates seamless experiences across both front-end and back-end technologies."
   },
   {
     name: "Mohab Alraddadi",
     role: "Mobile Developer/UI/UX Designer",
-    image: "https://imgur.com/a/bK6RD2E",
+    image: "/mohab.png",
     bio: "Designs intuitive interfaces and develops elegant mobile solutions."
   }
 ];
@@ -536,12 +536,17 @@ export default function About() {
                   className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <Image
+                  <img
                     src={member.image}
                     alt={member.name}
                     width={96}
                     height={96}
                     className="object-cover w-full h-full"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null; // Prevent infinite loop
+                      target.src = '/logo.png'; // Fallback to logo
+                    }}
                   />
                 </motion.div>
                 
