@@ -536,8 +536,8 @@ export default function About() {
                   className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <Image
-                    src={member.image}
+                  <img
+                    src={`https://mohab0p.github.io/TareeqWeb/${member.image}`}
                     alt={member.name}
                     width={96}
                     height={96}
