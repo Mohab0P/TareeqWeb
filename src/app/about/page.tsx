@@ -537,7 +537,7 @@ export default function About() {
                 whileHover={{ scale: 1.05 }}
               >
                 <img
-                  src="https://mohab0p.github.io/TareeqWeb/bahaa.png"
+                  src="/bahaa.png"
                   alt="Bahaa AlSulaiman"
                   width={96}
                   height={96}
@@ -582,7 +582,7 @@ export default function About() {
                 whileHover={{ scale: 1.05 }}
               >
                 <img
-                  src="moath.png"
+                  src="/moath.png"
                   alt="Moath Algahtani"
                   width={96}
                   height={96}
@@ -627,7 +627,7 @@ export default function About() {
                 whileHover={{ scale: 1.05 }}
               >
                 <img
-                  src="zaid.png"
+                  src="/zaid.png"
                   alt="Zaid Alshahrari"
                   width={96}
                   height={96}
@@ -672,7 +672,7 @@ export default function About() {
                 whileHover={{ scale: 1.05 }}
               >
                 <img
-                  src="https://mohab0p.github.io/TareeqWeb/sulaiman.png"
+                  src="/sulaiman.png"
                   alt="Sulaimman Alshamri"
                   width={96}
                   height={96}
@@ -717,7 +717,7 @@ export default function About() {
                 whileHover={{ scale: 1.05 }}
               >
                 <img
-                  src="https://mohab0p.github.io/TareeqWeb/mohab.png"
+                  src="/mohab.png"
                   alt="Mohab Alraddadi"
                   width={96}
                   height={96}
@@ -790,4 +790,4 @@ export default function About() {
       <Footer />
     </div>
   );
-} 
+}
