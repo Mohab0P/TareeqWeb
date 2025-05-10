@@ -1,43 +1,30 @@
 {
-  "name": "nextjs-shadcn",
+  "name": "tareeq-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0",
-    "build": "node scripts/fix-image-case.js && next build && node scripts/copy-public.js && node scripts/create-nojekyll.js && node scripts/fix-image-paths.js",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
-    "lint": "bunx biome lint --write && bunx tsc --noEmit",
-    "format": "bunx biome format --write",
-    "deploy": "node scripts/fix-image-case.js && next build && node scripts/copy-public.js && node scripts/create-nojekyll.js && node scripts/fix-image-paths.js && echo 'Note: Forms require Formspree setup as described in README.md'"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "@radix-ui/react-slot": "^1.2.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.10.5",
-    "lucide-react": "^0.475.0",
-    "next": "^15.2.0",
-    "nodemailer": "^7.0.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tailwind-merge": "^3.0.1",
-    "tailwindcss-animate": "^1.0.7"
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "framer-motion": "^11.0.3",
+    "next": "14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "@types/nodemailer": "^6.4.17",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.7",
-    "postcss": "^8",
+    "@types/node": "^20.11.16",
+    "@types/react": "^18.2.52",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.3.3"
   }
 }

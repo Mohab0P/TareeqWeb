@@ -77,17 +77,20 @@ export default function Home() {
     setSubmitStatus({ type: 'idle', message: '' });
     
     try {
-      // Use new email API endpoint
       const response = await fetch('https://email-api-9y3z.vercel.app/api/register', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          ...formData,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
           type: 'beta'
-        }),
+        })
       });
+
+      const data = await response.json();
 
       if (response.ok) {
         setSubmitStatus({
@@ -97,13 +100,15 @@ export default function Home() {
         setFormData({ name: '', email: '', phone: '' });
         setErrors({});
       } else {
-        throw new Error('Failed to submit form');
+        throw new Error(data.message || 'Failed to submit form');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'Unable to submit form. Please try again or contact support at tareeqiapp@gmail.com'
+        message: error instanceof Error 
+          ? `Unable to submit form: ${error.message}. Please try again or contact support at tareeqiapp@gmail.com`
+          : 'Unable to submit form. Please try again or contact support at tareeqiapp@gmail.com'
       });
     } finally {
       setIsSubmitting(false);
