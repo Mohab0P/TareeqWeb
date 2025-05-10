@@ -520,52 +520,231 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
-            {teamMembers.map((member, index) => (
+            {/* Hardcoded team member cards instead of using the array mapping */}
+            <motion.div 
+              key={1}
+              className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center"
+              variants={cardVariant}
+              whileHover={{ 
+                y: -10, 
+                transition: { duration: 0.3 }
+              }}
+              onHoverStart={() => setActiveMember(0)}
+              onHoverEnd={() => setActiveMember(null)}
+            >
               <motion.div 
-                key={index}
-                className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center"
-                variants={cardVariant}
-                whileHover={{ 
-                  y: -10, 
-                  transition: { duration: 0.3 }
-                }}
-                onHoverStart={() => setActiveMember(index)}
-                onHoverEnd={() => setActiveMember(null)}
+                className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
+                whileHover={{ scale: 1.05 }}
               >
-                <motion.div 
-                  className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <img
-                    src={`https://mohab0p.github.io/TareeqWeb/${member.image}`}
-                    alt={member.name}
-                    width={96}
-                    height={96}
-                    className="object-cover w-full h-full"
-                  />
-                </motion.div>
-                
-                <h3 className={`${spaceGrotesk.className} text-xl font-bold mb-2`}>
-                  {member.name}
-                </h3>
-                
-                <p className={`${outfit.className} text-purple-200 mb-4`}>
-                  {member.role}
-                </p>
-                
-                <motion.p 
-                  className={`${outfit.className} text-white/70 text-sm`}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ 
-                    opacity: activeMember === index ? 1 : 0,
-                    height: activeMember === index ? 'auto' : 0
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {member.bio}
-                </motion.p>
+                <img
+                  src="https://mohab0p.github.io/TareeqWeb/bahaa.png"
+                  alt="Bahaa AlSulaiman"
+                  width={96}
+                  height={96}
+                  className="object-cover w-full h-full"
+                />
               </motion.div>
-            ))}
+              
+              <h3 className={`${spaceGrotesk.className} text-xl font-bold mb-2`}>
+                Bahaa AlSulaiman
+              </h3>
+              
+              <p className={`${outfit.className} text-purple-200 mb-4`}>
+                Team Lead/Mobile Developer
+              </p>
+              
+              <motion.p 
+                className={`${outfit.className} text-white/70 text-sm`}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ 
+                  opacity: activeMember === 0 ? 1 : 0,
+                  height: activeMember === 0 ? 'auto' : 0
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                Leads the team with expertise in mobile app development and project management.
+              </motion.p>
+            </motion.div>
+
+            <motion.div 
+              key={2}
+              className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center"
+              variants={cardVariant}
+              whileHover={{ 
+                y: -10, 
+                transition: { duration: 0.3 }
+              }}
+              onHoverStart={() => setActiveMember(1)}
+              onHoverEnd={() => setActiveMember(null)}
+            >
+              <motion.div 
+                className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src="moath.png"
+                  alt="Moath Algahtani"
+                  width={96}
+                  height={96}
+                  className="object-cover w-full h-full"
+                />
+              </motion.div>
+              
+              <h3 className={`${spaceGrotesk.className} text-xl font-bold mb-2`}>
+                Moath Algahtani
+              </h3>
+              
+              <p className={`${outfit.className} text-purple-200 mb-4`}>
+                AI Developer
+              </p>
+              
+              <motion.p 
+                className={`${outfit.className} text-white/70 text-sm`}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ 
+                  opacity: activeMember === 1 ? 1 : 0,
+                  height: activeMember === 1 ? 'auto' : 0
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                Expert in machine learning models and AI implementation for road anomaly detection.
+              </motion.p>
+            </motion.div>
+
+            <motion.div 
+              key={3}
+              className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center"
+              variants={cardVariant}
+              whileHover={{ 
+                y: -10, 
+                transition: { duration: 0.3 }
+              }}
+              onHoverStart={() => setActiveMember(2)}
+              onHoverEnd={() => setActiveMember(null)}
+            >
+              <motion.div 
+                className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src="zaid.png"
+                  alt="Zaid Alshahrari"
+                  width={96}
+                  height={96}
+                  className="object-cover w-full h-full"
+                />
+              </motion.div>
+              
+              <h3 className={`${spaceGrotesk.className} text-xl font-bold mb-2`}>
+                Zaid Alshahrari
+              </h3>
+              
+              <p className={`${outfit.className} text-purple-200 mb-4`}>
+                System Analyst
+              </p>
+              
+              <motion.p 
+                className={`${outfit.className} text-white/70 text-sm`}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ 
+                  opacity: activeMember === 2 ? 1 : 0,
+                  height: activeMember === 2 ? 'auto' : 0
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                Analyzes complex systems requirements and designs efficient software architectures.
+              </motion.p>
+            </motion.div>
+
+            <motion.div 
+              key={4}
+              className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center"
+              variants={cardVariant}
+              whileHover={{ 
+                y: -10, 
+                transition: { duration: 0.3 }
+              }}
+              onHoverStart={() => setActiveMember(3)}
+              onHoverEnd={() => setActiveMember(null)}
+            >
+              <motion.div 
+                className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src="https://mohab0p.github.io/TareeqWeb/sulaiman.png"
+                  alt="Sulaimman Alshamri"
+                  width={96}
+                  height={96}
+                  className="object-cover w-full h-full"
+                />
+              </motion.div>
+              
+              <h3 className={`${spaceGrotesk.className} text-xl font-bold mb-2`}>
+                Sulaimman Alshamri
+              </h3>
+              
+              <p className={`${outfit.className} text-purple-200 mb-4`}>
+                Full Stack Developer
+              </p>
+              
+              <motion.p 
+                className={`${outfit.className} text-white/70 text-sm`}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ 
+                  opacity: activeMember === 3 ? 1 : 0,
+                  height: activeMember === 3 ? 'auto' : 0
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                Creates seamless experiences across both front-end and back-end technologies.
+              </motion.p>
+            </motion.div>
+
+            <motion.div 
+              key={5}
+              className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center"
+              variants={cardVariant}
+              whileHover={{ 
+                y: -10, 
+                transition: { duration: 0.3 }
+              }}
+              onHoverStart={() => setActiveMember(4)}
+              onHoverEnd={() => setActiveMember(null)}
+            >
+              <motion.div 
+                className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-white/30"
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src="https://mohab0p.github.io/TareeqWeb/mohab.png"
+                  alt="Mohab Alraddadi"
+                  width={96}
+                  height={96}
+                  className="object-cover w-full h-full"
+                />
+              </motion.div>
+              
+              <h3 className={`${spaceGrotesk.className} text-xl font-bold mb-2`}>
+                Mohab Alraddadi
+              </h3>
+              
+              <p className={`${outfit.className} text-purple-200 mb-4`}>
+                Mobile Developer/UI/UX Designer
+              </p>
+              
+              <motion.p 
+                className={`${outfit.className} text-white/70 text-sm`}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ 
+                  opacity: activeMember === 4 ? 1 : 0,
+                  height: activeMember === 4 ? 'auto' : 0
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                Designs intuitive interfaces and develops elegant mobile solutions.
+              </motion.p>
+            </motion.div>
           </motion.div>
         </div>
       </section>
